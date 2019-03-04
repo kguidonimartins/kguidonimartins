@@ -54,12 +54,12 @@ paginate = 10
     weight = 5
     identifier = "bio"
     url = "/bio/"
-  [[menu.main]]
-    name = "Talks"
-    pre = "<i class='fa fa-microphone fa-fw'></i>"
-    weight = 6
-    identifier = "talks"
-    url = "/talks/"
+#  [[menu.main]]
+#    name = "Talks"
+#    pre = "<i class='fa fa-microphone fa-fw'></i>"
+#    weight = 6
+#    identifier = "talks"
+#    url = "/talks/"
   [[menu.main]]
     name = "Scientific papers"
     pre = "<i class='fa fa-file fa-fw'></i>"
