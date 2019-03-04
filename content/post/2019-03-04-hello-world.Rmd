@@ -1,0 +1,31 @@
+---
+title: Hello World
+author: ''
+date: '2019-03-04'
+slug: hello-world
+categories:
+  - post
+tags:
+  - rmarkdown
+  - blogdown
+  - hugo
+description: ''
+topics: []
+---
+
+# Hello World!
+
+Este é o meu primeiro post!
+
+Vamos tentar algo aqui.
+
+```{r}
+if (!require("tidyverse")) install.packages("tidyverse")
+
+mtcars %>% 
+  ggplot(aes(mpg, disp)) +
+  geom_point() +
+  geom_smooth()
+```
+
+
