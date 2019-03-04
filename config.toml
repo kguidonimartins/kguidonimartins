@@ -1,0 +1,87 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "Karlo Guidoni Martins"
+theme = "blackburn"
+author = "Karlo Guidoni Martins"
+copyright = "&copy; 2019. All rights reserved."
+canonifyurls = true
+paginate = 10
+
+[indexes]
+  tag = "tags"
+  topic = "topics"
+
+[params]
+  title = "Karlo Guidoni Martins"
+  # Shown in the home page
+  subtitle = ""
+  brand = "Karlo"
+  googleAnalytics = "Your Google Analytics tracking ID"
+  disqus = "kguidonimartins"
+  # CSS name for highlight.js
+  highlightjs = "github"
+  dateFormat = "02 Jan 2006, 15:04"
+
+[menu]
+  # Shown in the side menu.
+  [[menu.main]]
+    name = "Home"
+    pre = "<i class='fa fa-home fa-fw'></i>"
+    weight = 1
+    identifier = "home"
+    url = "/"
+  [[menu.main]]
+    name = "Posts by date"
+    pre = "<i class='fa fa-list fa-fw'></i>"
+    weight = 2
+    identifier = "post"
+    url = "/post/"
+  [[menu.main]]
+    name = "Posts by tag"
+    pre = "<i class='fa fa-tags fa-fw'></i>"
+    weight = 3
+    identifier = "tags"
+    url = "/tags/"
+  [[menu.main]]
+    name = "About"
+    pre = "<i class='fa fa-question-circle fa-fw'></i>"
+    weight = 4
+    identifier = "about"
+    url = "/about/"
+  [[menu.main]]
+    name = "Bio"
+    pre = "<i class='fa fa-id-card fa-fw'></i>"
+    weight = 5
+    identifier = "bio"
+    url = "/bio/"
+  [[menu.main]]
+    name = "Talks"
+    pre = "<i class='fa fa-microphone fa-fw'></i>"
+    weight = 6
+    identifier = "talks"
+    url = "/talks/"
+  [[menu.main]]
+    name = "Scientific papers"
+    pre = "<i class='fa fa-file fa-fw'></i>"
+    weight = 7
+    identifier = "papers"
+    url = "/papers/"
+  [[menu.main]]
+    name = "Contact"
+    pre = "<i class='fa fa-phone fa-fw'></i>"
+    weight = 8
+    url = "/contact/"
+
+[social]
+  # Link your social networking accouns to the side menu
+  # by entering your username or ID.
+  twitter = "kguidonimartins"
+  facebook = ""
+  instagram = ""
+  github = "kguidonimartins"
+  stackoverflow = ""
+  linkedin = "kguidonimartins"
+  email = "kguidonimartins@gmail.com"
+  keybase = ""
+  orcid = "0000-0002-8458-8467"
+  researchgate = "Karlo_Gregorio_Guidoni-Martins"
