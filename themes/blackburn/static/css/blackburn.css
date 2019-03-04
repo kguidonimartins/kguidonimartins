@@ -1,7 +1,30 @@
 .header {
-  font-family: "Raleway", Helvetica, Arial, sans-serif
+  font-family: "Ubuntu Mono", sans-serif
 }
-
+p {
+  font-family: "Ubuntu Mono", sans-serif
+}
+a {
+  font-family: "Ubuntu Mono", sans-serif
+}
+h1 {
+  font-family: "Ubuntu Mono", sans-serif
+}
+h2 {
+  font-family: "Ubuntu Mono", sans-serif
+}
+h3 {
+  font-family: "Ubuntu Mono", sans-serif
+}
+h4 {
+  font-family: "Ubuntu Mono", sans-serif
+}
+time {
+  font-family: "Ubuntu Mono", sans-serif
+}
+code {
+  font-family: "Ubuntu Mono", sans-serif
+}
 a {
   color: #3b8bba;
   text-decoration: none;
@@ -56,7 +79,7 @@ article > footer {
 }
 
 #menu .brand {
-  font-family: Raleway;
+  font-family: Ubuntu Mono, monospace;
   font-weight: bold;
   font-size: 1em;
   letter-spacing: 0.1em;
