@@ -1,0 +1,36 @@
+---
+title: Wakatime Coding Activity
+author: Karlo
+date: '2019-03-10'
+slug: wakatime-coding-activity
+categories:
+  - post
+tags:
+  - code
+  - bash
+  - vim
+  - vscode
+  - atom
+  - rstudio
+  - IDE
+description: ''
+topics: []
+---
+
+# Testing Wakatime Embeddable Charts
+
+## Coding Activity
+
+<figure><embed src="https://wakatime.com/share/@kguidonimartins/f9e13836-8849-465e-8bc2-0af971afc888.svg"></embed></figure>
+
+## Languages
+
+<figure><embed src="https://wakatime.com/share/@kguidonimartins/72d9b912-02b4-4cbe-bd94-a6928afdd735.svg"></embed></figure>
+
+## Editors
+
+<figure><embed src="https://wakatime.com/share/@kguidonimartins/79403286-d782-42f1-9411-17b7c41c9d31.svg"></embed></figure>
+
+## Operating Systems
+
+<figure><embed src="https://wakatime.com/share/@kguidonimartins/0a98f133-e03b-471c-b6e5-633fcb93f755.svg"></embed></figure>
