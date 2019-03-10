@@ -4,3 +4,5 @@
 .Ruserdata
 blogdown
 public/
+00_setup.R
+01_new-post-template.R
