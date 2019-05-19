@@ -1,0 +1,30 @@
+---
+title: Reordenando barras no `ggplot`
+author: ''
+date: '2019-05-18'
+slug: reordenando-barras-no-ggplot
+categories: []
+tags:
+  - R
+  - ggplot2
+description: 'Segundo teste'
+topics: []
+---
+
+Instalando tidyverse
+
+```{r}
+if (!require("tidyverse")) install.packages("tidyverse")
+data("mtcars")
+```
+
+
+```{r}
+mtcars %>% 
+  rownames_to_column("cars") %>% 
+  mutate(cars = fct_reorder(cars, carb)) %>% 
+  ggplot(aes(cars, carb)) +
+  geom_col() +
+  coord_flip()
+```
+

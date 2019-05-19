@@ -1,29 +1,19 @@
 ---
-title: Hello World
+title: Reordenando barras no `ggplot`
 author: ''
-date: '2019-03-04'
-slug: hello-world
-categories:
-  - post
+date: '2019-05-18'
+slug: reordenando-barras-no-ggplot
+categories: []
 tags:
-  - rmarkdown
-  - blogdown
-  - hugo
-# description: ''
+  - R
+  - ggplot2
+description: 'Segundo teste'
 topics: []
-output:
-  md_document:
-    variant: markdown_github
-    preserve_yaml: true
 ---
 
 
 
-<div id="hello-world" class="section level1">
-<h1>Hello World!</h1>
-<p>Este é o meu primeiro post!</p>
-<!-- more -->
-<p>Vamos tentar algo aqui.</p>
+<p>Instalando tidyverse</p>
 <pre class="r"><code>if (!require(&quot;tidyverse&quot;)) install.packages(&quot;tidyverse&quot;)</code></pre>
 <pre><code>## Loading required package: tidyverse</code></pre>
 <pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
@@ -39,10 +29,11 @@ output:
 <pre><code>## ── Conflicts ──────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>mtcars %&gt;%
-  ggplot(aes(mpg, disp)) +
-  geom_point() +
-  geom_smooth()</code></pre>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
-<p><img src="/post/2019-03-04-hello-world_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-</div>
+<pre class="r"><code>data(&quot;mtcars&quot;)</code></pre>
+<pre class="r"><code>mtcars %&gt;% 
+  rownames_to_column(&quot;cars&quot;) %&gt;% 
+  mutate(cars = fct_reorder(cars, carb)) %&gt;% 
+  ggplot(aes(cars, carb)) +
+  geom_col() +
+  coord_flip()</code></pre>
+<p><img src="/post/2019-05-18-reordenando-barras-no-ggplot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>

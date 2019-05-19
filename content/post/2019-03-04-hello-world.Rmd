@@ -9,23 +9,27 @@ tags:
   - rmarkdown
   - blogdown
   - hugo
-description: ''
+# description: ''
 topics: []
+output:
+  md_document:
+    variant: markdown_github
+    preserve_yaml: true
 ---
 
 # Hello World!
 
 Este é o meu primeiro post!
 
+<!-- more -->
+
 Vamos tentar algo aqui.
 
 ```{r}
 if (!require("tidyverse")) install.packages("tidyverse")
 
-mtcars %>% 
+mtcars %>%
   ggplot(aes(mpg, disp)) +
   geom_point() +
   geom_smooth()
 ```
-
-
