@@ -21,6 +21,7 @@ output:
 
 Este é o meu primeiro post!
 
+
 <!-- more -->
 
 Vamos tentar algo aqui.
