@@ -1,0 +1,307 @@
+---
+title: Resolvendo desafio "Utopian Tree" do HackerRank em R e python
+author: Karlo Guidoni Martins
+date: '2019-09-01'
+slug: resolvendo-desafio-utopian-tree-do-hackerrank-em-r-e-python
+categories:
+  - post
+tags:
+  - R
+  - challenge
+  - python
+description: ''
+topics: []
+---
+
+
+Dias atrás recebi um [link](https://www.hackerrank.com/challenges/utopian-tree/problem?) para um desafio do site [HackerRank](https://www.hackerrank.com). O desafio fazia parte de uma das etapas do processo seletivo para a vaga de analista de dados de uma empresa que oferece serviços de transporte privado contratados por aplicativo de celular. Eu resolvi esse desafio usando as linguagens R e python. Eu resolvi escrever um post sobre isso pois a submissão do teste em R é diferente da submissão em python. 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+
+## Definição do desafio "Utopian Tree"
+
+
+A árvore utópica do desafio tem dois ciclos de crescimento a cada ano. 
+
+- Na primavera, a árvore dobra de tamanho. 
+- No verão, a árvore cresce um metro. 
+
+A descrição do desafio informa que uma muda da árvore utópica com um metro de altura foi plantada no início da primavera e pergunta: *qual seria o tamanho dessa árvore após $n$ ciclos de crescimento?* Por exemplo, se a árvore passou por cinco ciclos de crescimento ($n$ = 5), sua altura final deveria ser 14 metros, como informa a tabela abaixo:
+
+
+```{r, eval = TRUE, echo = FALSE}
+tamanho <- data.frame("Ciclo" = 0:5, "Altura" = c(1, 2, 3, 6, 7, 14))
+knitr::kable(tamanho, align = 'l', format = "html")
+```
+
+
+### Descrição da função
+
+
+O desafio pede para que seja criada a função `utopianTree`. Esta função deve conter apenas o argumento/parâmetro `n`, que é um número inteiro que informa por quantos ciclos de crescimento a árvore utópica passará. A função deve retornar um número inteiro com o tamanho final da árvore.
+
+
+### Dados de entrada e de saída
+
+
+Os dados de entrada são fornecidos pelo próprio site do desafio e devem ser lidos pelo "stdin". Um exemplo dos dados de entrada:
+
+
+```
+3
+0
+1
+4
+```
+
+
+A primeira linha informa quantas vezes a função será testada. Os valores de $n$ que serão testados pela função são informados a partir da segunda linha. Pelo "stdout", a função deve informar a altura da árvore a cada teste realizado. Usando os dados de entrada definidos acima, os resultados informados pela função devem ser:
+
+
+```
+1
+2
+7
+```
+
+## Construindo a função em python
+
+
+Vou começar pela função em python que deu menos dor de cabeça na hora da submissão.
+
+
+```{python, eval = TRUE}
+def utopianTree(n):
+    # altura inicial
+    height = 1
+    # se a árvore não passou por nenhum ciclo, sua altura é igual à inicial.
+    if n == 0:
+        return height
+    # do contrário, é necessário definir os ciclos de primavera e os de verão.
+    else:
+        for cycle in range(1, n + 1):
+            # ciclos de primavera.
+            if cycle % 2 != 0:
+                height *= 2
+            # ciclos de verão.
+            elif cycle % 2 == 0:
+                height += 1
+
+        return height
+```
+
+Usando os dados da tabela, se a árvore passar por 2 ciclos, o resultado deve ser igual a 3.
+
+```{python, eval = TRUE}
+utopianTree(2)
+```
+
+Mas se a árvore passar por 4 ciclos, o resultado deve ser igual a 7.
+
+```{python, eval = TRUE}
+utopianTree(4)
+```
+
+### Submissão 
+
+A parte de submissão da solução em python é facilitada pelo site. Ao selecionar a linguagem python para a solução do desafio será exibido o código abaixo:
+
+```{python}
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+# Complete the utopianTree function below.
+def utopianTree():
+    # VOCÊ DEVE INSERIR SUA FUNÇÃO AQUI!
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input())
+
+    for t_itr in range(t):
+        n = int(input())
+
+        result = utopianTree(n)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
+```
+
+A única coisa que precisa ser feita é completar a função e submeter o código. O código para a leitura dos dados de entrada e o consumo dos dados de saída já estão prontos. Isso é feito pelo trecho de código que começa com `if __name__ == '__main__':`.
+
+#### Solução completa em python
+
+A solução completa em python ficaria assim:
+
+```{python}
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+# Complete the utopianTree function below.
+def utopianTree(n):
+    # altura inicial
+    height = 1
+    # se a árvore não passou por nenhum ciclo, sua altura é igual à inicial.
+    if n == 0:
+        return height
+    # do contrário, é necessário definir os ciclos de primavera e os de verão.
+    else:
+        for cycle in range(1, n + 1):
+            # ciclos de primavera.
+            if cycle % 2 != 0:
+                height *= 2
+            # ciclos de verão.
+            elif cycle % 2 == 0:
+                height += 1
+
+        return height
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input())
+
+    for t_itr in range(t):
+        n = int(input())
+
+        result = utopianTree(n)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
+```
+
+## Construindo a função em R
+
+A função em R é relativamente parecida com a função em python. Mas existem duas diferenças importantes: a primeira é como a função deve retornar os dados de saída e a segunda é como o código deve ser submetido.
+
+```{r, eval = TRUE, echo = TRUE}
+utopian_tree <- function(n) {
+  # altura inicial
+  heigth <- 1
+  # se a árvore não passou por nenhum ciclo, sua altura é igual à inicial.
+  if (n == 0) {
+    write(as.character(heigth), stdout())
+  } else {
+    # do contrário, é necessário definir os ciclos de primavera e os de verão.
+    for (cycle in 1:n) {
+      # ciclos de primavera.
+      if (cycle %% 2 != 0) {
+        heigth <- heigth * 2
+        # ciclos de verão.
+      } else if (cycle %% 2 == 0) {
+        heigth <- heigth + 1
+        }
+    }
+    write(as.character(heigth), stdout())
+  }
+}
+```
+
+A primeira diferença é a forma como essa função precisa retornar os resultados. Em python, podemos usar o `return heigth`. Em R, poderíamos usar `return(height)`. Mas nesse caso em específico precisa ser usando `write(as.character(heigth), stdout())`. É dessa forma que o site vai consumir os dados de saída da função.
+
+Usando os dados da tabela, se a árvore passar por 2 ciclos, o resultado deve ser igual a 3.
+
+```{r, eval = TRUE}
+utopian_tree(2)
+```
+
+Mas se a árvore passar por 4 ciclos, o resultado deve ser igual a 7.
+
+```{r, eval = TRUE}
+utopian_tree(4)
+```
+
+### Submissão
+
+Quando selecionamos a linguagem R para resolver o desafio, a única mensagem que vemos no editor é:
+
+```{r}
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+```
+
+Isso quer dizer que devemos importar os dados de alguma forma. Nesta [página](https://www.hackerrank.com/tests/info/faq)  você pode encontrar como ler os dados de entrada usando diferentes linguagens. A solução que funcionou comigo (obviamente não é a única) foi a seguinte:
+
+```{r}
+# lendo os dados de entrada. 
+# lembrando que o primeiro valor é o número de vezes que a função será testada.
+sample_input <- suppressWarnings(readLines(file("stdin")))
+
+# assim, criamos um objeto contendo o número de testes.
+n_test_cases <- as.numeric(sample_input[1])
+
+# e criamos um outro vetor com os ciclos que serão usados em cada teste.
+n_cycles <- as.numeric(sample_input[-1])
+```
+
+Para finalizar, amarramos a função em um loop `for`:
+
+```{r}
+# testando a função 'n_test_cases' vezes
+for (test in 1:n_test_cases){
+  utopian_tree(n_cycles[test])
+}
+```
+
+#### Solução completa em R
+
+A solução completa em R fica assim:
+
+```{r}
+# lendo os dados de entrada. 
+# lembrando que o primeiro valor é o número de vezes que a função será testada.
+sample_input <- suppressWarnings(readLines(file("stdin")))
+
+# assim, criamos um objeto contendo o número de testes.
+n_test_cases <- as.numeric(sample_input[1])
+
+# e criamos um outro vetor com os ciclos que serão usados em cada teste.
+n_cycles <- as.numeric(sample_input[-1])
+
+utopian_tree <- function(n) {
+  # altura inicial
+  heigth <- 1
+  # se a árvore não passou por nenhum ciclo, sua altura é igual à inicial.
+  if (n == 0) {
+    write(as.character(heigth), stdout())
+  } else {
+    # do contrário, é necessário definir os ciclos de primavera e os de verão.
+    for (cycle in 1:n) {
+      # ciclos de primavera.
+      if (cycle %% 2 != 0) {
+        heigth <- heigth * 2
+        # ciclos de verão.
+      } else if (cycle %% 2 == 0) {
+        heigth <- heigth + 1
+        }
+    }
+    write(as.character(heigth), stdout())
+  }
+}
+
+# testando a função 'n_test_cases' vezes
+for (test in 1:n_test_cases){
+  utopian_tree(n_cycles[test])
+}
+```
+
+É isso!
