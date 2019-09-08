@@ -9,20 +9,15 @@ tags:
   - rmarkdown
   - blogdown
   - hugo
-# description: ''
+description: 'O clássico Hello World! Post de teste usando o `blogdown`.'
 topics: []
 output:
   md_document:
     variant: markdown_github
     preserve_yaml: true
-summary: " "
 ---
 
-# Hello World!
-
 Este é o meu primeiro post!
-
-
 
 Vamos tentar algo aqui.
 

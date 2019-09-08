@@ -7,9 +7,8 @@ categories: []
 tags:
   - R
   - ggplot2
-description: 'Segundo teste'
+description: 'Um lembrete sobre como reordenar as barras do `geom_col()`.'
 topics: []
-summary: "Resumo aqui"
 ---
 
 Instalando tidyverse

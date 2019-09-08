@@ -1,5 +1,5 @@
 ---
-title: Wakatime Coding Activity
+title: Wakatime coding activity
 author: Karlo
 date: '2019-03-10'
 slug: wakatime-coding-activity
@@ -13,9 +13,8 @@ tags:
   - atom
   - rstudio
   - IDE
-# description: ''
+description: 'Registro das minhas atividades usando o Wakatime.'
 topics: []
-# summary: " "
 ---
 
 # Testing Wakatime Embeddable Charts
