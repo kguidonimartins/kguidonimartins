@@ -1,29 +1,38 @@
 * {
-  font-family: "Ubuntu Mono", sans-serif
+  font-family: "Ubuntu Mono", sans-serif;
+  font-size: 101%;
 }
 .header {
   font-family: "Ubuntu Mono", sans-serif
 }
 p {
-  font-family: "Ubuntu Mono", sans-serif
+  font-family: "Ubuntu Mono", sans-serif;
+  color: #0F0301;
 }
 a {
-  font-family: "Ubuntu Mono", sans-serif
+  font-family: "Ubuntu Mono", sans-serif;
+  color: #0F0301;
+  font-size: 101%;
 }
 h1 {
-  font-family: "Ubuntu Mono", sans-serif
+  font-family: "Ubuntu Mono", sans-serif;
+  color: #0F0301;
 }
 h2 {
-  font-family: "Ubuntu Mono", sans-serif
+  font-family: "Ubuntu Mono", sans-serif;
+  color: #0F0301;
 }
 h3 {
-  font-family: "Ubuntu Mono", sans-serif
+  font-family: "Ubuntu Mono", sans-serif;
+  color: #0F0301;
 }
 h4 {
-  font-family: "Ubuntu Mono", sans-serif
+  font-family: "Ubuntu Mono", sans-serif;
+  color: #0F0301;
 }
 time {
-  font-family: "Ubuntu Mono", sans-serif
+  font-family: "Ubuntu Mono", sans-serif;
+  color: #0F0301;
 }
 code {
   font-family: "Ubuntu Mono", sans-serif;
@@ -122,5 +131,12 @@ table {
    border-bottom: 1px solid #666;
 }
 table thead th { border-bottom: 1px solid #ddd; }
-th, td { padding: 5px; }
+th, td {
+  padding: 5px;
+  color: #0F0301;
+}
 tr:nth-child(even) { background: #eee; }
+
+li {
+  color: #0F0301
+}
