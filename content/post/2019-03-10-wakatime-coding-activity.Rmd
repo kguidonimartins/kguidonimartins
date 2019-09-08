@@ -13,9 +13,9 @@ tags:
   - atom
   - rstudio
   - IDE
-description: ''
+# description: ''
 topics: []
-summary: " "
+# summary: " "
 ---
 
 # Testing Wakatime Embeddable Charts
