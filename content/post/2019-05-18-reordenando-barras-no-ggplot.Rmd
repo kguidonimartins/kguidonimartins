@@ -9,9 +9,9 @@ tags:
   - ggplot2
 description: 'Segundo teste'
 topics: []
-summary: "\n \n"
+summary: "Resumo aqui"
 ---
-<!-- more -->
+
 Instalando tidyverse
 
 ```{r}
