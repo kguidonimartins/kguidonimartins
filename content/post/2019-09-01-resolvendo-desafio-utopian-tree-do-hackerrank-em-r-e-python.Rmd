@@ -197,27 +197,27 @@ A função em R é relativamente parecida com a função em python. Mas existem 
 ```{r, eval = TRUE, echo = TRUE}
 utopian_tree <- function(n) {
   # altura inicial
-  heigth <- 1
+  height <- 1
   # se a árvore não passou por nenhum ciclo, sua altura é igual à inicial.
   if (n == 0) {
-    write(as.character(heigth), stdout())
+    write(as.character(height), stdout())
   } else {
     # do contrário, é necessário definir os ciclos de primavera e os de verão.
     for (cycle in 1:n) {
       # ciclos de primavera.
       if (cycle %% 2 != 0) {
-        heigth <- heigth * 2
+        height <- height * 2
         # ciclos de verão.
       } else if (cycle %% 2 == 0) {
-        heigth <- heigth + 1
+        height <- height + 1
         }
     }
-    write(as.character(heigth), stdout())
+    write(as.character(height), stdout())
   }
 }
 ```
 
-A primeira diferença é a forma como essa função precisa retornar os resultados. Em python, podemos usar o `return heigth`. Em R, poderíamos usar `return(height)`. Mas nesse caso em específico precisa ser usando `write(as.character(heigth), stdout())`. É dessa forma que o site vai consumir os dados de saída da função.
+A primeira diferença é a forma como essa função precisa retornar os resultados. Em python, podemos usar o `return height`. Em R, poderíamos usar `return(height)`. Mas nesse caso em específico precisa ser usando `write(as.character(height), stdout())`. É dessa forma que o site vai consumir os dados de saída da função.
 
 Usando os dados da tabela, se a árvore passar por 2 ciclos, o resultado deve ser igual a 3.
 
@@ -279,22 +279,22 @@ n_cycles <- as.numeric(sample_input[-1])
 
 utopian_tree <- function(n) {
   # altura inicial
-  heigth <- 1
+  height <- 1
   # se a árvore não passou por nenhum ciclo, sua altura é igual à inicial.
   if (n == 0) {
-    write(as.character(heigth), stdout())
+    write(as.character(height), stdout())
   } else {
     # do contrário, é necessário definir os ciclos de primavera e os de verão.
     for (cycle in 1:n) {
       # ciclos de primavera.
       if (cycle %% 2 != 0) {
-        heigth <- heigth * 2
+        height <- height * 2
         # ciclos de verão.
       } else if (cycle %% 2 == 0) {
-        heigth <- heigth + 1
+        height <- height + 1
         }
     }
-    write(as.character(heigth), stdout())
+    write(as.character(height), stdout())
   }
 }
 

@@ -211,25 +211,25 @@ if __name__ == &#39;__main__&#39;:
 <p>A função em R é relativamente parecida com a função em python. Mas existem duas diferenças importantes: a primeira é como a função deve retornar os dados de saída e a segunda é como o código deve ser submetido.</p>
 <pre class="r"><code>utopian_tree &lt;- function(n) {
   # altura inicial
-  heigth &lt;- 1
+  height &lt;- 1
   # se a árvore não passou por nenhum ciclo, sua altura é igual à inicial.
   if (n == 0) {
-    write(as.character(heigth), stdout())
+    write(as.character(height), stdout())
   } else {
     # do contrário, é necessário definir os ciclos de primavera e os de verão.
     for (cycle in 1:n) {
       # ciclos de primavera.
       if (cycle %% 2 != 0) {
-        heigth &lt;- heigth * 2
+        height &lt;- height * 2
         # ciclos de verão.
       } else if (cycle %% 2 == 0) {
-        heigth &lt;- heigth + 1
+        height &lt;- height + 1
         }
     }
-    write(as.character(heigth), stdout())
+    write(as.character(height), stdout())
   }
 }</code></pre>
-<p>A primeira diferença é a forma como essa função precisa retornar os resultados. Em python, podemos usar o <code>return heigth</code>. Em R, poderíamos usar <code>return(height)</code>. Mas nesse caso em específico precisa ser usando <code>write(as.character(heigth), stdout())</code>. É dessa forma que o site vai consumir os dados de saída da função.</p>
+<p>A primeira diferença é a forma como essa função precisa retornar os resultados. Em python, podemos usar o <code>return height</code>. Em R, poderíamos usar <code>return(height)</code>. Mas nesse caso em específico precisa ser usando <code>write(as.character(height), stdout())</code>. É dessa forma que o site vai consumir os dados de saída da função.</p>
 <p>Usando os dados da tabela, se a árvore passar por 2 ciclos, o resultado deve ser igual a 3.</p>
 <pre class="r"><code>utopian_tree(2)</code></pre>
 <pre><code>## 3</code></pre>
@@ -270,22 +270,22 @@ n_cycles &lt;- as.numeric(sample_input[-1])
 
 utopian_tree &lt;- function(n) {
   # altura inicial
-  heigth &lt;- 1
+  height &lt;- 1
   # se a árvore não passou por nenhum ciclo, sua altura é igual à inicial.
   if (n == 0) {
-    write(as.character(heigth), stdout())
+    write(as.character(height), stdout())
   } else {
     # do contrário, é necessário definir os ciclos de primavera e os de verão.
     for (cycle in 1:n) {
       # ciclos de primavera.
       if (cycle %% 2 != 0) {
-        heigth &lt;- heigth * 2
+        height &lt;- height * 2
         # ciclos de verão.
       } else if (cycle %% 2 == 0) {
-        heigth &lt;- heigth + 1
+        height &lt;- height + 1
         }
     }
-    write(as.character(heigth), stdout())
+    write(as.character(height), stdout())
   }
 }
 
