@@ -1,6 +1,9 @@
 ---
 title: Resolvendo desafio "Utopian Tree" do HackerRank em R e python
 author: Karlo Guidoni Martins
+output:
+  blogdown::html_page:
+    toc: true
 date: '2019-09-01'
 slug: resolvendo-desafio-utopian-tree-do-hackerrank-em-r-e-python
 categories:
@@ -11,6 +14,7 @@ tags:
   - python
 description: ''
 topics: []
+summary: " "
 ---
 
 

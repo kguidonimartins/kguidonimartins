@@ -15,6 +15,7 @@ output:
   md_document:
     variant: markdown_github
     preserve_yaml: true
+summary: " "
 ---
 
 # Hello World!
@@ -22,7 +23,6 @@ output:
 Este é o meu primeiro post!
 
 
-<!-- more -->
 
 Vamos tentar algo aqui.
 
