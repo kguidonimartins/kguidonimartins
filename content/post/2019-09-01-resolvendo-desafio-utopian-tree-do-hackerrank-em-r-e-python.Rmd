@@ -12,9 +12,8 @@ tags:
   - R
   - challenge
   - python
-description: ''
+description: 'Como submeter uma solução em R e em python.'
 topics: []
-summary: " "
 ---
 
 
