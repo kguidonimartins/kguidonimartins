@@ -1,0 +1,152 @@
+---
+title: Gerando queries em SQL no R usando o pacote `dbplyr`
+author: ''
+date: '2019-10-28'
+slug: gerando-queries-em-sql-no-r-usando-o-pacote-dbplyr
+categories: []
+tags:
+  - R
+  - database
+  - SQL
+  - tidyverse
+description: 'Aprenda a gerar queries em SQL usando o pacote `dbplyr`'
+topics: []
+---
+
+O meta-pacote [`tidyverse`](https://www.tidyverse.org/) tem sido o meu grande aliado no dia-a-dia. Ele tem funcionado como um canivete suíço para leitura, manipulação e visualização de dados. A facilidade para acesso e para consultas a banco de dados não é surpresa, especialmente se você está acostumado aos verbos do pacote [`dplyr`](https://dplyr.tidyverse.org/). Esse tipo de operação não faz parte da minha rotina, mas eu já precisei acessar e fazer consultas em um banco de dados do tipo SQL. Novamente, o `tidyverse` junto com o `dbplyr` cumpriram seus papéis de forma elegante. 
+
+O resumo da ópera é o seguinte: se você não sabe escrever queries em SQL, o pacote `dbplyr` vai escrevê-las para você. Basicamente, você escreve as manipulações usando o `dplyr` (e amigos) e o `dbplyr` traduz para SQL. Veremos como isso funciona.
+
+# Instalando os pacotes
+
+Instale os pacotes necessários.
+
+```{r, message=FALSE}
+if (!require("DBI")) 
+  install.packages("DBI")
+if (!require("RSQLite")) 
+  install.packages("RSQLite")
+if (!require("tidyverse")) 
+  install.packages("tidyverse")
+if (!require("dbplyr")) 
+  install.packages("dbplyr")
+```
+
+# Banco de dados para teste
+
+Aqui, usaremos um banco de dados de teste para simular as consultas. Existem algumas formas de se fazer isso: gerar um banco em memória, criar e salvar um banco em seu próprio computador ou conectar-se a um banco de dados real. Consulte [aqui](https://dbplyr.tidyverse.org/) para mais detalhes.
+
+## Criando banco em memória
+
+Vamos criar um banco de dados em memória usando o dataset `mtcars`. São `r nrow(mtcars)` carros descritos por `r ncol(mtcars)` variáveis.
+
+```{r}
+# Verificando o conteúdo do dataset
+mtcars
+```
+
+O primeiro passo é criar uma conexão em memória: 
+
+```{r}
+connection_to_db <- 
+  DBI::dbConnect(
+    drv = RSQLite::SQLite(), 
+    ":memory:"
+    )
+
+# confira
+connection_to_db
+```
+
+Depois, incorporamos o dataset a esse banco.
+
+```{r}
+mtcars_on_db <- 
+  mtcars %>%                      # dataset
+  rownames_to_column("cars") %>%  # transformando o nome da linhas em uma coluna
+  copy_to(                          
+    dest = connection_to_db,      # nosso banco em memória
+    name = "table-mtcars"         # nome da nossa tabela no banco (opcional)
+    )
+
+# confira
+mtcars_on_db
+```
+
+O resultado `[?? x 11]` na primeira linha significa que não foram informadas todas as linhas da tabela. Isso acontece também com outros tipos de consultas. Quando o resultado da consulta excede 10 linhas, precisamos usar a função `collect()`.
+
+```{r}
+mtcars_on_db %>% 
+  collect()
+```
+
+<!-- ## Banco de dados como uma `lazy table` -->
+
+<!-- Outra opção interessante do `dbplyr` é a possibilidade de criar uma "lazy table" -->
+<!-- e fazer as consultas sem precisar de uma conexão com banco de dados. A vantagem aqui é rapidez para criar um suposto banco de dados.  -->
+
+<!-- Vamos criar uma "lazy table" usando novamente o dataset `mtcars`. Para isso, use: -->
+
+<!-- ```{r} -->
+<!-- mtcars_lazy_table <-  -->
+<!--   mtcars %>%  -->
+<!--   tbl_lazy( -->
+<!--     con = simulate_sqlite() -->
+<!--     ) -->
+
+<!-- # confira -->
+<!-- mtcars_lazy_table -->
+<!-- ``` -->
+
+<!-- Repare que o objeto `mtcars_lazy_table` é uma consulta prévia ao "banco de dados". Para gerar as queries, podemos usar tanto o objeto `mtcars_on_db` quanto o `mtcars_lazy_table`.  -->
+
+<!-- A diferença básica entre eles é o resultado das consultas. Usando o `mtcars_on_db` (banco em memória) temos a opção de ver o que de fato nossa consulta (ou manipulação) gera como resultado. Usando o `mtcars_lazy_table` veremos somente a query. -->
+
+# Gerando queries
+
+Suponha que você queira saber a média dos valores da coluna `mpg` (milhas por galão) por `carb` (número de carburadores).
+
+```{r}
+mtcars_on_db %>%        # nosso banco em memória
+  group_by(carb) %>%    # agrupa os dados por `carb`
+  summarise(mean(mpg))  # calcula a média de `mpg` dentro de cada grupo de `carb`
+```
+
+Para ver como isso seria feito em SQL, use a função `show_query()`.
+
+```{r}
+mtcars_on_db %>% 
+  group_by(carb) %>% 
+  summarise(mean(mpg)) %>% 
+  show_query()
+```
+
+Isso funciona para qualquer tipo de consulta.
+
+```{r}
+consulta <- 
+  mtcars_on_db %>%
+  select(cars, drat, carb, mpg) %>% 
+  filter(drat < 3.15) %>% 
+  mutate(
+    drat_percent = drat / sum(drat, na.rm = TRUE),
+    carb = case_when(
+      carb == 1 ~ "um carb",
+      carb == 2 ~ "dois carbs",
+      carb == 3 ~ "três carbs",
+      carb == 4 ~ "quatro carbs",
+      carb == 8 ~ "oito carbs"
+    )
+  ) %>% 
+  arrange(desc(mpg)) %>% 
+  select(cars, carb, mpg, drat_percent) 
+
+# confira o resultado da consulta
+consulta
+
+# confira a query
+consulta %>% 
+  show_query()
+```
+
+O próximo passo seria copiar a query e aplicar ao banco de dados que você quer consultar. Isso já me ajudou muito em consultas simples. Espero que seja útil para você também!
