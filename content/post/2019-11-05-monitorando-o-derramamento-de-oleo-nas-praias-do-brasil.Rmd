@@ -312,8 +312,6 @@ df %>%
 
 # Mapa interativo das localidades monitoradas
 
-<!-- *NOTA: As coordenadas suspeitas (nos Estados de São Paulo e Espírito Santo) já foram reportadas.* -->
-
 Clique nos círculos para ter acesso às informações da localidade.
 
 ```{r, eval = TRUE, fig.height=6, fig.width=9}
