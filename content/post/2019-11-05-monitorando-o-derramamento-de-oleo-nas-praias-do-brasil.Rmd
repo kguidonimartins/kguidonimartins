@@ -46,7 +46,7 @@ ipak <- function(pkg) {
   suppressPackageStartupMessages(sapply(pkg, require, character.only = TRUE))
 }
 
-ipak(c("tidyverse", "tidylog", "readxl", "here", "biogeo", "plotly", "fs", "tools", "rvest", "widgetframe"))
+ipak(c("tidyverse", "tidylog", "readxl", "biogeo", "plotly", "fs", "tools", "rvest", "widgetframe"))
 
 
 ############################################################
@@ -105,7 +105,7 @@ get_data(dest_folder = "data-raw-oleo")
 ############################################################
 
 last_file_on_local_folder <- 
-  dir_info(here::here("content", "post", "data-raw-oleo")) %>% 
+  dir_info("data-raw-oleo") %>% 
   mutate(file_type = file_ext(path)) %>% 
   arrange(desc(birth_time)) %>% 
   filter(file_type == "xlsx") %>% 
@@ -182,7 +182,7 @@ df_clean <-
   dplyr::select(-starts_with("lat_"), -starts_with("long_")) 
 )
 
-dir_create(here::here("content", "post", "data-clean-oleo"))
+dir_create("data-clean-oleo")
 
 file_to_save <- 
   last_file_on_local_folder %>% 
@@ -214,7 +214,6 @@ ipak(
     "tidyverse",
     "tidylog",
     "fs",
-    "here",
     "tools",
     "plotly",
     "DT",
@@ -255,7 +254,7 @@ render_table <- function(data){
 
 ```{r, eval = TRUE, message = FALSE}
 last_file_on_local_folder <-
-  dir_info(here::here("content", "post", "data-clean-oleo")) %>% 
+  dir_info("data-clean-oleo") %>% 
   mutate(file_type = file_ext(path)) %>% 
   arrange(desc(birth_time)) %>% 
   filter(file_type == "csv") %>% 
