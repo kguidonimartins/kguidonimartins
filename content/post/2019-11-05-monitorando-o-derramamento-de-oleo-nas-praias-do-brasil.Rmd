@@ -26,6 +26,8 @@ O código que produz este relatório pode ser encontrado aqui: https://github.co
 A única diferença dos dados usados aqui dos dados originais é a transformação das coordenadas geográficas de **graus, minutos e segundos** para **graus decimais**.
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = FALSE, message = "hide")
+
 ############################################################
 #                                                          #
 #                  instalação dos pacotes                  #
@@ -198,7 +200,6 @@ if (!file.exists(file_to_save)){
 
 
 
-knitr::opts_chunk$set(echo = FALSE, eval = FALSE, message = "hide")
 
 ipak <- function(pkg) {
   new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
@@ -248,9 +249,9 @@ render_table <- function(data){
 }
 ```
 
-***
+<!-- *** -->
 
-# Localidades monitoradas
+<!-- # Localidades monitoradas -->
 
 ```{r, eval = TRUE, message = FALSE}
 last_file_on_local_folder <-
@@ -284,13 +285,13 @@ df <- read_csv(last_file_on_local_folder) %>%
     Status
   )
 
-render_table(df) 
+# render_table(df) 
 ```
 
-***
-# Localidades monitoradas por Estado
+<!-- *** -->
+<!-- # Localidades monitoradas por Estado -->
 
-```{r, eval = TRUE, message = FALSE, fig.height=5, fig.width=7}
+```{r, eval = FALSE, message = FALSE, fig.height=5, fig.width=7}
 df %>% 
   group_by(Estado, Status) %>% 
   count() %>% 
@@ -308,7 +309,7 @@ df %>%
   facet_wrap( ~Status)
 ```
 
-***
+<!-- *** -->
 
 # Mapa interativo das localidades monitoradas
 
@@ -325,7 +326,7 @@ mapa_oleo <- leaflet(df) %>%
       lat = ~ latitude,
       popup = ~popupTable(
         x = df, 
-        zcol = c("Localidade", "Município", "Estado", "Status"), 
+        zcol = c("Localidade", "Município", "Estado", "Status", "data_avist", "data_revis", "intervalo entre visitas (em dias)"), 
         row.numbers = FALSE, 
         feature.id = FALSE
         ),
@@ -342,54 +343,54 @@ mapa_oleo <- leaflet(df) %>%
 mapa_oleo
 ```
 
-***
+<!-- *** -->
 
-# Locais revisitados
+<!-- # Locais revisitados -->
 
-```{r, eval = TRUE}
-df %>% 
-  filter(!is.na(data_revis)) %>% 
-  render_table() 
+```{r, eval = FALSE}
+# df %>% 
+#   filter(!is.na(data_revis)) %>% 
+#   render_table() 
 ```
 
-***
+<!-- *** -->
 
-# Locais revisitados que não têm óleo
+<!-- # Locais revisitados que não têm óleo -->
 
-```{r, eval = TRUE}
-df %>% 
-  filter(!is.na(data_revis), Status == "Óleo - Não Observado") %>% 
-  render_table()
+```{r, eval = FALSE}
+# df %>% 
+#   filter(!is.na(data_revis), Status == "Óleo - Não Observado") %>% 
+#   render_table()
 ```
 
-***
+<!-- *** -->
 
-# Locais revisitados que ainda têm óleo
+<!-- # Locais revisitados que ainda têm óleo -->
 
-```{r, eval = TRUE}
-df %>% 
-  filter(!is.na(data_revis), Status %in% c("Oleada - Vestígios/Esparsos", "Oleada - Manchas")) %>% 
-  render_table()
+```{r, eval = FALSE}
+# df %>% 
+#   filter(!is.na(data_revis), Status %in% c("Oleada - Vestígios/Esparsos", "Oleada - Manchas")) %>% 
+#   render_table()
 ```
 
-***
+<!-- *** -->
 
-# Locais que não foram revisitados e que não têm óleo
+<!-- # Locais que não foram revisitados e que não têm óleo -->
 
-```{r, eval = TRUE}
-df %>% 
-  filter(is.na(data_revis), Status == "Óleo - Não Observado") %>% 
-  render_table()
+```{r, eval = FALSE}
+# df %>% 
+#   filter(is.na(data_revis), Status == "Óleo - Não Observado") %>% 
+#   render_table()
 ```
 
-***
+<!-- *** -->
 
-# Locais que não foram revisitados e que têm óleo
+<!-- # Locais que não foram revisitados e que têm óleo -->
 
-```{r, eval = TRUE}
-df %>% 
-  filter(is.na(data_revis), Status %in% c("Oleada - Vestígios/Esparsos", "Oleada - Manchas")) %>% 
-  render_table() 
+```{r, eval = FALSE}
+# df %>% 
+#   filter(is.na(data_revis), Status %in% c("Oleada - Vestígios/Esparsos", "Oleada - Manchas")) %>% 
+#   render_table() 
 ```
 
 
