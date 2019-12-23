@@ -34,15 +34,15 @@ Você precisará instalar o python, o R e o RStudio (opcional, mas altamente rec
 
 Para usar o python dentro do R, temos duas opções. A primeira é usar o RMarkdown. Com ele, podemos mesclar códigos em R e em python. Podemos inclusive usar os objetos criados pelo python (um data frame, por exemplo) no R. A operação contrária também funciona. Para usar o python no RMkardown, crie um novo arquivo RMarkdown clicando em "File" na barra de status, depois clique em "R Markdown".
 
-![](./images/py-script-option.png)
+![](/images/py-script-option.png)
 
 A segunda opção para utilização do python é usando um script python. Porém, não será tão simples reutilizar os objetos criados por cada linguagem em uma mesma sessão do R. Para usar um script python no RStudio, clique em "File" na barra de status, depois clique "New file" e finalmente em "Python script".
 
-![](./images/py-script-option.png)
+![](/images/py-script-option.png)
 
 Neste post, vou utilizar o RMarkdown. Com ele, podemos inserir chunks para diversas linguagens. Ao abrir um novo arquivo RMarkdown você verá a seguinte opção:
 
-![](./images/chunks-option.png)
+![](/images/chunks-option.png)
 
 São essas opções que permitem usar uma ou mais linguagens em um mesmo documento.
 
