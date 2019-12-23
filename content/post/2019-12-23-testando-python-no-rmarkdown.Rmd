@@ -14,9 +14,7 @@ description: 'Já pensou em usar o python dentro do RStudio? Nesse post testarem
 topics: []
 ---
 
-Finalmente consegui rodar o python dentro do RMarkdown no RStudio! Minhas tentativas anteriores falharam miseravalmente. Eu até conseguia usar a biblioteca `pandas` do python, mas encontrei diversos problemas para instalar novas bibliotecas. Essa guerra durou meses! 
-
-Dias atrás a galera do RStudio lançou uma nova versão do `{reticulate}` (pacote responsável pela interface do python dentro do R), que veio acompanhada de um post no blog deles (veja o post [aqui](https://blog.rstudio.com/2019/12/20/reticulate-1-14/)). Foi através do post deles que descobri a existência do pacote `{rminiconda}`! Esse pacote resolveu todos os problemas e é justamente isso que gostaria de registrar aqui nesse post.
+Dias atrás a galera do RStudio lançou uma nova versão do `{reticulate}` (pacote responsável pela interface do python dentro do R), que veio acompanhada de um post no blog deles (veja o post [aqui](https://blog.rstudio.com/2019/12/20/reticulate-1-14/)). Foi através do post deles que descobri a existência do pacote `{rminiconda}`! Esse pacote resolve problemas de compatibilidade de versões do python e é justamente isso que gostaria de registrar aqui nesse post.
 
 # Por que python?
 
