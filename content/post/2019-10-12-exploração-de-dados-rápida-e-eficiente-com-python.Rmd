@@ -1,0 +1,120 @@
+---
+title: Exploração de dados rápida e eficiente com python
+author: ''
+date: '2019-10-12'
+slug: exploração-de-dados-rápida-e-eficiente-com-python
+categories: []
+tags:
+  - python
+  - EDA
+description: 'Veja como gerar um elegante relatório sobre os seus dados de maneira rápida e eficiente.'
+topics: []
+---
+
+Eu tenho usado R há algum tempo. Sem dúvida, é a minha ferramenta favorita para manipulação, limpeza e visualização de dados, pelo menos até o momento. No entanto, em alguns momentos eu preciso de uma descrição rápida do perfil (frequência dos valores e estatísticas descritivas) dos dados que tenho em mãos. Até agora eu não encontrei uma ferramenta mais eficiente para fazer isso do que a biblioteca em python [pandas-profiling](https://github.com/pandas-profiling/pandas-profiling).
+
+```{r, message=FALSE, results='hide', echo=FALSE}
+if (!require("reticulate")) 
+  install.packages("reticulate")
+if (!require("tidyverse")) 
+  install.packages("tidyverse")
+if (!require("glue")) 
+  install.packages("glue")
+if (!require("remotes")) 
+  install.packages("remotes")
+if (!require("rminiconda")) 
+  install_github("hafen/rminiconda")
+
+packageVersion("reticulate")
+
+env_name <- "testando_rminiconda"
+
+check_setup_rminiconda <- function(env_name) {
+  python_for_r <- rminiconda::find_miniconda_python(env_name)
+  reticulate::use_python(python_for_r, required = TRUE)
+  message(glue("Ambiente `{env_name}` configurado no `reticulate`!"))
+}
+
+install_setup_rminiconda <- function(env_name) {
+  if (rminiconda::is_miniconda_installed(name = env_name)) {
+    message(glue("Ambiente `{env_name}` já existe!"))
+    check_setup_rminiconda(env_name)
+  } else {
+    message("Instalando novo ambiente: `{env_name}`!")
+    rminiconda::install_miniconda(name = env_name)
+    check_setup_rminiconda(env_name)
+  }
+}
+
+install_setup_rminiconda(env_name)
+
+rminiconda::test_miniconda(env_name)
+
+rminiconda_pip_install(pkg_name = "pandas", name = env_name)
+
+pip_install_pkg <- function(pkgs_py, update = FALSE) {
+  
+  if (update == TRUE) {
+    pip_update_arg <- "-U"
+  } else {
+    pip_update_arg <- ""
+  }
+  
+  pkgs_py %>% 
+  purrr::map(
+    ~rminiconda_pip_install(
+      pkg_name = .x,
+      name = env_name, 
+      args = pip_update_arg
+      )
+    ) 
+}
+
+pkgs_py <- c(
+  "pandas",
+  "numpy",
+  "pandas_profiling"
+  )
+
+pip_install_pkg(pkgs_py)
+```
+
+# Usando a pandas-profiling
+
+Precisaremos de poucas linhas para a descrição completa dos dados. Aqui, utilizaremos um dataset disponibilizado pela galera do [TidyTuesday](https://github.com/rfordatascience/tidytuesday). Esse dataset contém obervações de explosões nucleares que aconteceram no mundo. 
+
+Primeiro, carregamos as bibliotecas necessárias:
+
+```{python}
+import pandas as pd
+import numpy as np
+import pandas_profiling
+```
+
+Precisamos baixar e ler o dataset:
+
+```{python}
+link = 'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-20/nuclear_explosions.csv'
+
+df = pd.read_csv(link)
+```
+
+Breve checagem dos dados.
+
+```{python}
+df.head()
+```
+
+A criação do perfil dos dados precisa apenas de uma linha de código, assim:
+
+```{python}
+profile = df.profile_report(title='Explosões nucleares pelo mundo')
+```
+
+A visualização completa do relatório gerado pode ser feita diretamente no Jupyter Notebook. Podemos salvar o relatório e visualizá-lo no navegador. Usaremos essa segunda opção:
+
+```{python}
+profile.to_file(output_file="perfil_dados_explosoes_nucleares.html")
+```
+
+Veja o relatório completo [aqui](https://kguidonimartins.netlify.com/perfil_dados_explosoes_nucleares.html).

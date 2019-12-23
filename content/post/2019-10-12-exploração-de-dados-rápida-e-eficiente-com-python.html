@@ -1,0 +1,43 @@
+---
+title: Exploração de dados rápida e eficiente com python
+author: ''
+date: '2019-10-12'
+slug: exploração-de-dados-rápida-e-eficiente-com-python
+categories: []
+tags:
+  - python
+  - EDA
+description: 'Veja como gerar um elegante relatório sobre os seus dados de maneira rápida e eficiente.'
+topics: []
+---
+
+
+
+<p>Eu tenho usado R há algum tempo. Sem dúvida, é a minha ferramenta favorita para manipulação, limpeza e visualização de dados, pelo menos até o momento. No entanto, em alguns momentos eu preciso de uma descrição rápida do perfil (frequência dos valores e estatísticas descritivas) dos dados que tenho em mãos. Até agora eu não encontrei uma ferramenta mais eficiente para fazer isso do que a biblioteca em python <a href="https://github.com/pandas-profiling/pandas-profiling">pandas-profiling</a>.</p>
+<div id="usando-a-pandas-profiling" class="section level1">
+<h1>Usando a pandas-profiling</h1>
+<p>Precisaremos de poucas linhas para a descrição completa dos dados. Aqui, utilizaremos um dataset disponibilizado pela galera do <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a>. Esse dataset contém obervações de explosões nucleares que aconteceram no mundo.</p>
+<p>Primeiro, carregamos as bibliotecas necessárias:</p>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+import pandas_profiling</code></pre>
+<p>Precisamos baixar e ler o dataset:</p>
+<pre class="python"><code>link = &#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-20/nuclear_explosions.csv&#39;
+
+df = pd.read_csv(link)</code></pre>
+<p>Breve checagem dos dados.</p>
+<pre class="python"><code>df.head()</code></pre>
+<pre><code>##    date_long  year  id_no country  ... yield_upper purpose       name     type
+## 0   19450716  1945  45001     USA  ...        21.0      WR    TRINITY    TOWER
+## 1   19450805  1945  45002     USA  ...        15.0  COMBAT  LITTLEBOY  AIRDROP
+## 2   19450809  1945  45003     USA  ...        21.0  COMBAT     FATMAN  AIRDROP
+## 3   19460630  1946  46001     USA  ...        21.0      WE       ABLE  AIRDROP
+## 4   19460724  1946  46002     USA  ...        21.0      WE      BAKER       UW
+## 
+## [5 rows x 16 columns]</code></pre>
+<p>A criação do perfil dos dados precisa apenas de uma linha de código, assim:</p>
+<pre class="python"><code>profile = df.profile_report(title=&#39;Explosões nucleares pelo mundo&#39;)</code></pre>
+<p>A visualização completa do relatório gerado pode ser feita diretamente no Jupyter Notebook. Podemos salvar o relatório e visualizá-lo no navegador. Usaremos essa segunda opção:</p>
+<pre class="python"><code>profile.to_file(output_file=&quot;perfil_dados_explosoes_nucleares.html&quot;)</code></pre>
+<p>Veja o relatório completo <a href="https://kguidonimartins.netlify.com/perfil_dados_explosoes_nucleares.html">aqui</a>.</p>
+</div>
