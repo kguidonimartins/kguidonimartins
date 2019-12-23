@@ -20,12 +20,17 @@ topics: []
 <div id="por-que-python" class="section level1">
 <h1>Por que python?</h1>
 <p>A popularidade de python tem crescido nos últimos anos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja <a href="https://octoverse.github.com/">aqui</a> e <a href="https://insights.stackoverflow.com/survey/2019#technology">aqui</a> o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando <a href="https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo">análise de dados para embasar suas apurações</a>.</p>
-<p>Uso o R diariamente, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python. Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa difícil (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreira pra mim. Existem soluções no <a href="https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook">Jupyter Notebook</a>, mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos.</p>
+<p>Uso o R diariamente, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python. Por que eu ficaria preso a uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa difícil (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreira pra mim. Existem soluções no <a href="https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook">Jupyter Notebook</a>, mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos.</p>
 <p>Vamos ver como isso funciona.</p>
 </div>
 <div id="instalação-das-dependências" class="section level1">
 <h1>Instalação das dependências</h1>
-<p>Você precisará instalar o python, o R e o RStudio para essa solução funcionar. A instalaçao do R e do RStudio é trivial e deixarei isso por sua conta. A do python, eu sugiro instalar a versão do <a href="https://docs.anaconda.com/anaconda/install/">Anaconda</a>. Essa é uma instalação completa de diversas bibliotecas usadas em data science. Ela servirá de base para o <code>{rminiconda}</code>.</p>
+<p>Você precisará instalar o python, o R e o RStudio para essa solução funcionar. A instalação das linguagens e do RStudio não é foco desse post. No entanto, deixarei aqui os links que te levarão para os downloads.</p>
+<ul>
+<li><p>Baixe o R aqui: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></p></li>
+<li><p>Baixe o RStudio aqui (baixe a versão free): <a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a></p></li>
+<li><p>Baixe e instale o python usando o Anaconda (baixe a versão 3.7): <a href="https://www.anaconda.com/distribution/" class="uri">https://www.anaconda.com/distribution/</a></p></li>
+</ul>
 </div>
 <div id="usando-o-python-dentro-do-rstudio" class="section level1">
 <h1>Usando o python dentro do RStudio</h1>
@@ -39,7 +44,7 @@ topics: []
 </div>
 <div id="instalação-dos-pacotes-necessários-no-r" class="section level1">
 <h1>Instalação dos pacotes necessários no R</h1>
-<p>A rotina abaixo vai instalar os pacotes do R necessários para rodar o python no RMarkdown. O <code>{reticulate}</code> é o pacote que vai facilitar o uso do python no RStudio e o <code>{rminiconda}</code> é o pacote que vai isolar a versão do python que vamos utilizar aqui. O conflito entre diferentes versões do python instaladas em um mesmo sistema operacional é muito comum. O <code>{rminiconda}</code> resolve esse problema. Os outros pacotes da lista abaixo darão suporte à algumas rotinas implementadas aqui.</p>
+<p>A rotina abaixo vai instalar os pacotes do R necessários para rodar o python no RMarkdown. O <code>{reticulate}</code> é o pacote que vai facilitar o uso do python no RStudio e o <code>{rminiconda}</code> é o pacote que vai isolar a versão do python que vamos utilizar aqui. O conflito entre diferentes versões do python instaladas em um mesmo sistema operacional é muito comum. O <code>{rminiconda}</code> resolve esse problema. Os outros pacotes da lista abaixo darão suporte a algumas rotinas implementadas aqui.</p>
 <p>Vale lembrar que, até a data desse post, o <code>{rminiconda}</code> ainda não foi publicado no repositório oficial de pacotes do R (<a href="https://cran.r-project.org/">CRAN</a>). Aqui, utilizaremos a última versão disponível no <a href="https://github.com/hafen/rminiconda">github</a>.</p>
 <pre class="r"><code>if (!require(&quot;reticulate&quot;)) 
   install.packages(&quot;reticulate&quot;)
@@ -128,11 +133,11 @@ import matplotlib.pyplot as plt</code></pre>
 <p>Checando o data frame.</p>
 <pre class="python"><code>df.head()</code></pre>
 <pre><code>##     A   B   C   D
-## 0  24  66  36  64
-## 1  35  74  82  12
-## 2  61  59  47   8
-## 3  73  10  48  55
-## 4  93  34  77  57</code></pre>
+## 0  48  88  13  13
+## 1  80  38   1  80
+## 2  94  64  74  55
+## 3   0  76   2  55
+## 4  58  74  91  79</code></pre>
 <p>Plotando um scatter plot.</p>
 <pre class="python"><code>fig = plt.figure()
 plt.scatter(df[&#39;A&#39;], df[&#39;B&#39;])
@@ -151,12 +156,12 @@ plt.show()</code></pre>
 <p>Checando o data frame no R.</p>
 <pre class="r"><code>head(r_df)</code></pre>
 <pre><code>##    A  B  C  D
-## 1 24 66 36 64
-## 2 35 74 82 12
-## 3 61 59 47  8
-## 4 73 10 48 55
-## 5 93 34 77 57
-## 6  3 86 19 48</code></pre>
+## 1 48 88 13 13
+## 2 80 38  1 80
+## 3 94 64 74 55
+## 4  0 76  2 55
+## 5 58 74 91 79
+## 6 52 17 18 90</code></pre>
 <p>Plotando.</p>
 <pre class="r"><code>r_df %&gt;% 
   ggplot(aes(x = A, y = B)) +

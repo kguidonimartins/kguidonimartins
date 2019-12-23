@@ -20,13 +20,19 @@ Dias atrás a galera do RStudio lançou uma nova versão do `{reticulate}` (paco
 
 A popularidade de python tem crescido nos últimos anos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja [aqui](https://octoverse.github.com/) e [aqui](https://insights.stackoverflow.com/survey/2019#technology) o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando [análise de dados para embasar suas apurações](https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo). 
 
-Uso o R diariamente, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python. Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa difícil (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreira pra mim. Existem soluções no [Jupyter Notebook](https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook), mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos. 
+Uso o R diariamente, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python. Por que eu ficaria preso a uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa difícil (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreira pra mim. Existem soluções no [Jupyter Notebook](https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook), mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos. 
 
 Vamos ver como isso funciona.
 
 # Instalação das dependências
 
-Você precisará instalar o python, o R e o RStudio para essa solução funcionar. A instalaçao do R e do RStudio é trivial e deixarei isso por sua conta. A do python, eu sugiro instalar a versão do [Anaconda](https://docs.anaconda.com/anaconda/install/). Essa é uma instalação completa de diversas bibliotecas usadas em data science. Ela servirá de base para o `{rminiconda}`. 
+Você precisará instalar o python, o R e o RStudio para essa solução funcionar. A instalação das linguagens e do RStudio não é foco desse post. No entanto, deixarei aqui os links que te levarão para os downloads. 
+
+- Baixe o R aqui: https://cran.r-project.org/
+
+- Baixe o RStudio aqui (baixe a versão free): https://rstudio.com/products/rstudio/download/
+
+- Baixe e instale o python usando o Anaconda (baixe a versão 3.7): https://www.anaconda.com/distribution/
 
 # Usando o python dentro do RStudio
 
@@ -46,7 +52,7 @@ São essas opções que permitem usar uma ou mais linguagens em um mesmo arquivo
 
 # Instalação dos pacotes necessários no R
 
-A rotina abaixo vai instalar os pacotes do R necessários para rodar o python no RMarkdown. O `{reticulate}` é o pacote que vai facilitar o uso do python no RStudio e o `{rminiconda}` é o pacote que vai isolar a versão do python que vamos utilizar aqui. O conflito entre diferentes versões do python instaladas em um mesmo sistema operacional é muito comum. O `{rminiconda}` resolve esse problema. Os outros pacotes da lista abaixo darão suporte à algumas rotinas implementadas aqui. 
+A rotina abaixo vai instalar os pacotes do R necessários para rodar o python no RMarkdown. O `{reticulate}` é o pacote que vai facilitar o uso do python no RStudio e o `{rminiconda}` é o pacote que vai isolar a versão do python que vamos utilizar aqui. O conflito entre diferentes versões do python instaladas em um mesmo sistema operacional é muito comum. O `{rminiconda}` resolve esse problema. Os outros pacotes da lista abaixo darão suporte a algumas rotinas implementadas aqui. 
 
 Vale lembrar que, até a data desse post, o `{rminiconda}` ainda não foi publicado no repositório oficial de pacotes do R ([CRAN](https://cran.r-project.org/)). Aqui, utilizaremos a última versão disponível no [github](https://github.com/hafen/rminiconda).
 
