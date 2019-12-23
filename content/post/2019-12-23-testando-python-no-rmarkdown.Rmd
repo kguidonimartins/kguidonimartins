@@ -20,15 +20,15 @@ Dias atrás a galera do RStudio lançou uma nova versão do `{reticulate}` (paco
 
 # Por que python?
 
-A primeira pergunta que pode surgir é: por que usar python? Bem, a popularidade de python tem crescido nos últimos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja [aqui](https://octoverse.github.com/) e [aqui](https://insights.stackoverflow.com/survey/2019#technology) o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando [análise de dados para embasar suas apurações](https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo). 
+A popularidade de python tem crescido nos últimos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja [aqui](https://octoverse.github.com/) e [aqui](https://insights.stackoverflow.com/survey/2019#technology) o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando [análise de dados para embasar suas apurações](https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo). 
 
-Eu adoro o R, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python (veremos isso em outros post). Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa tão difícil assim (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreria pra mim. Existem soluções para isso no [Jupyter Notebook](https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook), mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos para mim. Além disso, facilitaria a produção de posts para o blog (que foi criado usando o `{blogdown}`). 
+Uso o R diariamente (inclusive para escrever post para este blog), mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python. Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa difícil (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreria pra mim. Existem soluções para isso no [Jupyter Notebook](https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook), mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos. 
 
-Vamos para ver como isso funciona.
+Vamos ver como isso funciona.
 
 # Instalação das dependências
 
-Você precisará instalar o python, o R e o RStudio (opcional, mas altamente recomendado) para essa solução funcionar. A instalaçao do R e do RStudio é trivial. Deixarei isso por sua conta. A do python, eu sugiro instalar a versão do [Anaconda](https://docs.anaconda.com/anaconda/install/). Essa é uma instalação completa de diversas bibliotecas usadas em data science. Ela servirá de base para o `{rminiconda}`. 
+Você precisará instalar o python, o R e o RStudio para essa solução funcionar. A instalaçao do R e do RStudio é trivial e deixarei isso por sua conta. A do python, eu sugiro instalar a versão do [Anaconda](https://docs.anaconda.com/anaconda/install/). Essa é uma instalação completa de diversas bibliotecas usadas em data science. Ela servirá de base para o `{rminiconda}`. 
 
 # Usando o python dentro do RStudio
 
@@ -44,7 +44,7 @@ Neste post, vou utilizar o RMarkdown. Com ele, podemos inserir chunks para diver
 
 <img src="../../images/chunks-option.png" alt="" />
 
-São essas opções que permitem usar uma ou mais linguagens em um mesmo documento.
+São essas opções que permitem usar uma ou mais linguagens em um mesmo arquivo RMarkdown.
 
 # Instalação dos pacotes necessários no R
 

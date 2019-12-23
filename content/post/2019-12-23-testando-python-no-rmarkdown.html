@@ -20,13 +20,13 @@ topics: []
 <p>Dias atrás a galera do RStudio lançou uma nova versão do <code>{reticulate}</code> (pacote responsável pela interface do python dentro do R), que veio acompanhada de um post no blog deles (veja o post <a href="https://blog.rstudio.com/2019/12/20/reticulate-1-14/">aqui</a>). Foi através do post deles que descobri a existência do pacote <code>{rminiconda}</code>! Esse pacote resolveu todos os problemas e é justamente isso que gostaria de registrar aqui nesse post.</p>
 <div id="por-que-python" class="section level1">
 <h1>Por que python?</h1>
-<p>A primeira pergunta que pode surgir é: por que usar python? Bem, a popularidade de python tem crescido nos últimos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja <a href="https://octoverse.github.com/">aqui</a> e <a href="https://insights.stackoverflow.com/survey/2019#technology">aqui</a> o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando <a href="https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo">análise de dados para embasar suas apurações</a>.</p>
-<p>Eu adoro o R, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python (veremos isso em outros post). Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa tão difícil assim (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreria pra mim. Existem soluções para isso no <a href="https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook">Jupyter Notebook</a>, mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos para mim. Além disso, facilitaria a produção de posts para o blog (que foi criado usando o <code>{blogdown}</code>).</p>
-<p>Vamos para ver como isso funciona.</p>
+<p>A popularidade de python tem crescido nos últimos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja <a href="https://octoverse.github.com/">aqui</a> e <a href="https://insights.stackoverflow.com/survey/2019#technology">aqui</a> o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando <a href="https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo">análise de dados para embasar suas apurações</a>.</p>
+<p>Uso o R diariamente (inclusive para escrever post para este blog), mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python. Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa difícil (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreria pra mim. Existem soluções para isso no <a href="https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook">Jupyter Notebook</a>, mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos.</p>
+<p>Vamos ver como isso funciona.</p>
 </div>
 <div id="instalação-das-dependências" class="section level1">
 <h1>Instalação das dependências</h1>
-<p>Você precisará instalar o python, o R e o RStudio (opcional, mas altamente recomendado) para essa solução funcionar. A instalaçao do R e do RStudio é trivial. Deixarei isso por sua conta. A do python, eu sugiro instalar a versão do <a href="https://docs.anaconda.com/anaconda/install/">Anaconda</a>. Essa é uma instalação completa de diversas bibliotecas usadas em data science. Ela servirá de base para o <code>{rminiconda}</code>.</p>
+<p>Você precisará instalar o python, o R e o RStudio para essa solução funcionar. A instalaçao do R e do RStudio é trivial e deixarei isso por sua conta. A do python, eu sugiro instalar a versão do <a href="https://docs.anaconda.com/anaconda/install/">Anaconda</a>. Essa é uma instalação completa de diversas bibliotecas usadas em data science. Ela servirá de base para o <code>{rminiconda}</code>.</p>
 </div>
 <div id="usando-o-python-dentro-do-rstudio" class="section level1">
 <h1>Usando o python dentro do RStudio</h1>
@@ -36,7 +36,7 @@ topics: []
 <p><img src="../../images/py-script-option.png" alt="" /></p>
 <p>Neste post, vou utilizar o RMarkdown. Com ele, podemos inserir chunks para diversas linguagens. Ao abrir um novo arquivo RMarkdown você verá a seguinte opção:</p>
 <p><img src="../../images/chunks-option.png" alt="" /></p>
-<p>São essas opções que permitem usar uma ou mais linguagens em um mesmo documento.</p>
+<p>São essas opções que permitem usar uma ou mais linguagens em um mesmo arquivo RMarkdown.</p>
 </div>
 <div id="instalação-dos-pacotes-necessários-no-r" class="section level1">
 <h1>Instalação dos pacotes necessários no R</h1>
@@ -129,11 +129,11 @@ import matplotlib.pyplot as plt</code></pre>
 <p>Checando o data frame.</p>
 <pre class="python"><code>df.head()</code></pre>
 <pre><code>##     A   B   C   D
-## 0  33  12  74   8
-## 1   8  38  52   1
-## 2  41  32  60  72
-## 3  83   8  68  95
-## 4  54  34  93  39</code></pre>
+## 0  69  40  17  63
+## 1  17  11  59  77
+## 2  73  26  80  38
+## 3  72  71  70  19
+## 4  13  82  44   0</code></pre>
 <p>Plotando um scatter plot.</p>
 <pre class="python"><code>fig = plt.figure()
 plt.scatter(df[&#39;A&#39;], df[&#39;B&#39;])
@@ -152,12 +152,12 @@ plt.show()</code></pre>
 <p>Checando o data frame no R.</p>
 <pre class="r"><code>head(r_df)</code></pre>
 <pre><code>##    A  B  C  D
-## 1 33 12 74  8
-## 2  8 38 52  1
-## 3 41 32 60 72
-## 4 83  8 68 95
-## 5 54 34 93 39
-## 6 71 31 70 78</code></pre>
+## 1 69 40 17 63
+## 2 17 11 59 77
+## 3 73 26 80 38
+## 4 72 71 70 19
+## 5 13 82 44  0
+## 6 71 40 87 29</code></pre>
 <p>Plotando.</p>
 <pre class="r"><code>r_df %&gt;% 
   ggplot(aes(x = A, y = B)) +
