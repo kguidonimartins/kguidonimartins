@@ -1,0 +1,212 @@
+---
+title: Testando python no RMarkdown
+author: ''
+date: '2019-12-23'
+slug: testando-python-no-rmarkdown
+categories: []
+tags:
+  - python
+  - rmarkdown
+  - reticulate
+  - rminiconda
+  - R
+description: 'Já pensou em usar o python dentro do RStudio? Nesse post testaremos a solução mais recente.'
+topics: []
+---
+
+
+
+<p>Finalmente consegui rodar o python dentro do RMarkdown no RStudio! Minhas tentativas anteriores falharam miseravalmente. Eu até conseguia usar a biblioteca <code>pandas</code> do python, mas encontrei diversos problemas para instalar novas bibliotecas. Essa guerra durou meses!</p>
+<p>Dias atrás a galera do RStudio lançou uma nova versão do <code>{reticulate}</code> (pacote responsável pela interface do python dentro do R), que veio acompanhada de um post no blog deles (veja o post <a href="https://blog.rstudio.com/2019/12/20/reticulate-1-14/">aqui</a>). Foi através do post deles que descobri a existência do pacote <code>{rminiconda}</code>! Esse pacote resolveu todos os problemas e é justamente isso que gostaria de registrar aqui nesse post.</p>
+<div id="porque-python" class="section level1">
+<h1>Porque python?</h1>
+<p>A primeira pergunta que pode surgir é: por que usar python? Bem, a popularidade de python tem crescido nos últimos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja <a href="https://octoverse.github.com/">aqui</a> e <a href="https://insights.stackoverflow.com/survey/2019#technology">aqui</a> o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando <a href="https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo">análise de dados para embasar suas apurações</a>.</p>
+<p>Eu adoro o R, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python (veremos isso em outros post). Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa tão difícil assim (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreria pra mim. Existem soluções para isso no <a href="https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook">Jupyter Notebook</a>, mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos para mim. Além disso, facilitaria a produção de posts para o blog (que foi criado usando o <code>{blogdown}</code>).</p>
+<p>Vamos para ver como isso funciona.</p>
+</div>
+<div id="instalação-das-dependências" class="section level1">
+<h1>Instalação das dependências</h1>
+<p>Você precisará instalar o python, o R e o RStudio (opcional, mas altamente recomendado) para essa solução funcionar. A instalaçao do R e do RStudio é trivial. Deixarei isso por sua conta. A do python, eu sugiro instalar a versão do <a href="https://docs.anaconda.com/anaconda/install/">Anaconda</a>. Essa é uma instalação completa de diversas bibliotecas usadas em data science. Ela servirá de base para o <code>{rminiconda}</code>.</p>
+</div>
+<div id="usando-o-python-dentro-do-rstudio" class="section level1">
+<h1>Usando o python dentro do RStudio</h1>
+<p>Para usar o python dentro do R, temos duas opções. A primeira é usar o RMarkdown. Com ele, podemos mesclar códigos em R e em python. Podemos inclusive usar os objetos criados pelo python (um data frame, por exemplo) no R. A operação contrária também funciona. Para usar o python no RMkardown, crie um novo arquivo RMarkdown clicando em “File” na barra de status, depois clique em “R Markdown”.</p>
+<p><img src="images/py-script-option.png" /></p>
+<p>A segunda opção para utilização do python é usando um script python. Porém, não será tão simples reutilizar os objetos criados por cada linguagem em uma mesma sessão do R. Para usar um script python no RStudio, clique em “File” na barra de status, depois clique “New file” e finalmente em “Python script”.</p>
+<p><img src="images/py-script-option.png" /></p>
+<p>Neste post, vou utilizar o RMarkdown. Com ele, podemos inserir chunks para diversas linguagens. Ao abrir um novo arquivo RMarkdown você verá a seguinte opção:</p>
+<p><img src="images/chunks-option.png" /></p>
+<p>São essas opções que permitem usar uma ou mais linguagens em um mesmo documento.</p>
+</div>
+<div id="instalação-dos-pacotes-necessários-no-r" class="section level1">
+<h1>Instalação dos pacotes necessários no R</h1>
+<p>A rotina abaixo vai instalar os pacotes do R necessários para rodar o python no RMarkdown. O <code>{reticulate}</code> é o pacote que vai facilitar o uso do python no RStudio e o <code>{rminiconda}</code> é o pacote que vai isolar a versão do python que vamos utilizar aqui. O conflito entre diferentes versões do python instaladas em um mesmo sistema operacional é muito comum. O <code>{rminiconda}</code> resolve esse problema. Os outros pacotes da lista abaixo darão suporte à algumas rotinas implementadas aqui.</p>
+<p>Vale lembrar que, até a data desse post, o <code>{rminiconda}</code> ainda não foi publicado no repositório oficial de pacotes do R (<a href="https://cran.r-project.org/">CRAN</a>). Aqui, utilizaremos a última versão disponível no <a href="https://github.com/hafen/rminiconda">github</a>.</p>
+<pre class="r"><code>if (!require(&quot;reticulate&quot;)) 
+  install.packages(&quot;reticulate&quot;)
+if (!require(&quot;tidyverse&quot;)) 
+  install.packages(&quot;tidyverse&quot;)
+if (!require(&quot;glue&quot;)) 
+  install.packages(&quot;glue&quot;)
+if (!require(&quot;remotes&quot;)) 
+  install.packages(&quot;remotes&quot;)
+if (!require(&quot;rminiconda&quot;)) 
+  install_github(&quot;hafen/rminiconda&quot;)</code></pre>
+<p>Com os pacotes devidamente instalados, precisamos checar a versão do <code>{reticulate}</code>, que deve ser no mínimo a 1.14:</p>
+<pre class="r"><code>packageVersion(&quot;reticulate&quot;)</code></pre>
+<pre><code>## [1] &#39;1.14&#39;</code></pre>
+<p>A próxima etapa é instalar um novo ambiente com o <code>{rminiconda}</code> e configurá-lo no <code>{reticulate}</code>. Nosso novo ambiente vai se chamar <code>testando_rminiconda</code>. Você pode escolher outro nome se preferir.</p>
+<pre class="r"><code>env_name &lt;- &quot;testando_rminiconda&quot;</code></pre>
+<p>A rotina abaixo vai checar se o ambiente <code>env_name</code> já existe. Caso não exista, ela vai instalar um novo ambiente.</p>
+<pre class="r"><code>check_setup_rminiconda &lt;- function(env_name) {
+  python_for_r &lt;- rminiconda::find_miniconda_python(env_name)
+  reticulate::use_python(python_for_r, required = TRUE)
+  message(glue(&quot;Ambiente `{env_name}` configurado no `reticulate`!&quot;))
+}
+
+install_setup_rminiconda &lt;- function(env_name) {
+  if (rminiconda::is_miniconda_installed(name = env_name)) {
+    message(glue(&quot;Ambiente `{env_name}` já existe!&quot;))
+    check_setup_rminiconda(env_name)
+  } else {
+    message(&quot;Instalando novo ambiente: `{env_name}`!&quot;)
+    rminiconda::install_miniconda(name = env_name)
+    check_setup_rminiconda(env_name)
+  }
+}
+
+install_setup_rminiconda(env_name)</code></pre>
+<pre><code>## Ambiente `testando_rminiconda` já existe!</code></pre>
+<pre><code>## Ambiente `testando_rminiconda` configurado no `reticulate`!</code></pre>
+<p>Uma vez instalado, testamos se o ambiente está funcionando:</p>
+<pre class="r"><code>rminiconda::test_miniconda(env_name)</code></pre>
+<pre><code>## [1] &quot;hello world&quot;</code></pre>
+<p>Se você viu um “hello world”, o ambiente está instalado e funcionando!</p>
+</div>
+<div id="instalação-das-bibliotecas-do-python-pelo-r" class="section level1">
+<h1>Instalação das bibliotecas do python pelo R</h1>
+<p>Agora, seguimos para uma instalação isolada das bibliotecas do python usando a função <code>rminiconda_pip_install()</code>. Para instalar o <code>pandas</code>, usaremos:</p>
+<pre class="r"><code>rminiconda_pip_install(pkg_name = &quot;pandas&quot;, name = env_name)</code></pre>
+<p>Usaremos uma rotina para automatizar a instalação de várias bibliotecas. Primeiro, criamos uma função pra isso:</p>
+<pre class="r"><code>pip_install_pkg &lt;- function(pkgs_py, update = FALSE) {
+  
+  if (update == TRUE) {
+    pip_update_arg &lt;- &quot;-U&quot;
+  } else {
+    pip_update_arg &lt;- &quot;&quot;
+  }
+  
+  pkgs_py %&gt;% 
+  purrr::map(
+    ~rminiconda_pip_install(
+      pkg_name = .x,
+      name = env_name, 
+      args = pip_update_arg
+      )
+    ) 
+}</code></pre>
+<p>Listamos as bibliotecas de interesse:</p>
+<pre class="r"><code>pkgs_py &lt;- c(
+  &quot;pandas&quot;,
+  &quot;numpy&quot;,
+  &quot;matplotlib&quot;
+  )</code></pre>
+<p>E usamos nossa função:</p>
+<pre class="r"><code>pip_install_pkg(pkgs_py)</code></pre>
+</div>
+<div id="usando-python-no-r" class="section level1">
+<h1>Usando python no R</h1>
+<p>Agora, insira um chunk para python para utilizar as bibliotecas instaladas (a execução do código em python também pode ser feita com <kbd>Ctrl</kbd>+<kbd>Enter</kbd>):</p>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt</code></pre>
+<p>Com as bibliotecas carregadas, podemos explorar alguns comandos. Vamos criar data frame com valores aleatórios com <code>pandas</code> e fazer um gráfico com o <code>matplotlib</code>.</p>
+<pre class="python"><code>df = pd.DataFrame(
+    np.random.randint(0, 100, size=(100, 4)
+  ), 
+  columns=list(&#39;ABCD&#39;)
+  )</code></pre>
+<p>Checando o data frame.</p>
+<pre class="python"><code>df.head()</code></pre>
+<pre><code>##     A   B   C   D
+## 0  71  46   8  81
+## 1   4  82  20  84
+## 2  27  90  78  15
+## 3  72  10  47  58
+## 4  57   5  65  27</code></pre>
+<p>Plotando um scatter plot.</p>
+<pre class="python"><code>fig = plt.figure()
+plt.scatter(df[&#39;A&#39;], df[&#39;B&#39;])
+plt.title(&#39;Scatter plot em python dentro do R&#39;)
+plt.xlabel(&#39;Coluna A&#39;)
+plt.ylabel(&#39;Coluna B&#39;)
+plt.show()</code></pre>
+<p><img src="/post/2019-12-23-testando-python-no-rmarkdown_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="reutilizando-objetos-do-python-no-r" class="section level1">
+<h1>Reutilizando objetos do python no R</h1>
+<p>Podemos reutilizar os objetos criados em python no R. Os objetos criados em python são armazenados na memória e podem ser recuperados usando o comando <code>py$</code> em chunk para R. Esse comando vai listar os objetos do python armazenados na memória. Por exemplo, insira um chunk para R e recupere o data frame usando:</p>
+<pre class="r"><code>py$df</code></pre>
+<p>Vamos atribuir o reultado do comando anterior a um objeto no R.</p>
+<pre class="r"><code>r_df &lt;- py$df</code></pre>
+<p>Checando o data frame no R.</p>
+<pre class="r"><code>head(r_df)</code></pre>
+<pre><code>##    A  B  C  D
+## 1 71 46  8 81
+## 2  4 82 20 84
+## 3 27 90 78 15
+## 4 72 10 47 58
+## 5 57  5 65 27
+## 6 92 29 42 94</code></pre>
+<p>Plotando.</p>
+<pre class="r"><code>r_df %&gt;% 
+  ggplot(aes(x = A, y = B)) +
+  geom_point() +
+  labs(
+    title = &quot;Scatter plot no R usando data frame do python&quot;, 
+    x = &quot;Coluna A&quot;,
+    y = &quot;Coluna B&quot;
+    )</code></pre>
+<p><img src="/post/2019-12-23-testando-python-no-rmarkdown_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="reutilizando-objetos-do-r-no-python" class="section level1">
+<h1>Reutilizando objetos do R no python</h1>
+<p>Usar objeto do R no python também funciona. Vamos usar o dataset <code>mtcars</code> para testar isso. Primeiro, carregamos o dataset.</p>
+<pre class="r"><code>data(&quot;mtcars&quot;)</code></pre>
+<p>Checando.</p>
+<pre class="r"><code>head(mtcars)</code></pre>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<p>Para recuperarmos o objeto do R no python, usaremos a função a função <code>r_to_py()</code> do <code>{rminiconda}</code>.</p>
+<pre class="r"><code>r_to_py(mtcars)</code></pre>
+<p>Vamos atribuir o reultado do comando anterior a um objeto no R.</p>
+<pre class="r"><code>mtcars_py &lt;- r_to_py(mtcars)</code></pre>
+<p>Agora esse objeto pode ser recuperado pelo python usando o comando <code>r.</code> em um chunk para python. Esse comando vai listar os objetos do R que estão disponíveis para o python:</p>
+<pre class="python"><code>r.mtcars_py</code></pre>
+<p>Vamos atribuir o resultado do comando acima a um objeto em python.</p>
+<pre class="python"><code>mtcars_py = r.mtcars_py</code></pre>
+<p>Checando.</p>
+<pre class="python"><code>mtcars_py.head()</code></pre>
+<pre><code>##                     mpg  cyl   disp     hp  drat  ...   qsec   vs   am  gear  carb
+## Mazda RX4          21.0  6.0  160.0  110.0  3.90  ...  16.46  0.0  1.0   4.0   4.0
+## Mazda RX4 Wag      21.0  6.0  160.0  110.0  3.90  ...  17.02  0.0  1.0   4.0   4.0
+## Datsun 710         22.8  4.0  108.0   93.0  3.85  ...  18.61  1.0  1.0   4.0   1.0
+## Hornet 4 Drive     21.4  6.0  258.0  110.0  3.08  ...  19.44  1.0  0.0   3.0   1.0
+## Hornet Sportabout  18.7  8.0  360.0  175.0  3.15  ...  17.02  0.0  0.0   3.0   2.0
+## 
+## [5 rows x 11 columns]</code></pre>
+<p>Plotando.</p>
+<pre class="python"><code>fig = plt.figure()
+plt.scatter(mtcars_py[&#39;mpg&#39;], mtcars_py[&#39;qsec&#39;])
+plt.title(&#39;Scatter plot do data frame do R em python&#39;)
+plt.xlabel(&#39;mpg&#39;)
+plt.ylabel(&#39;qsec&#39;)
+plt.show()</code></pre>
+<p><img src="/post/2019-12-23-testando-python-no-rmarkdown_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>É isso!</p>
+</div>
