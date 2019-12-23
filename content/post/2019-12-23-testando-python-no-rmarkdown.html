@@ -31,11 +31,11 @@ topics: []
 <div id="usando-o-python-dentro-do-rstudio" class="section level1">
 <h1>Usando o python dentro do RStudio</h1>
 <p>Para usar o python dentro do R, temos duas opções. A primeira é usar o RMarkdown. Com ele, podemos mesclar códigos em R e em python. Podemos inclusive usar os objetos criados pelo python (um data frame, por exemplo) no R. A operação contrária também funciona. Para usar o python no RMkardown, crie um novo arquivo RMarkdown clicando em “File” na barra de status, depois clique em “R Markdown”.</p>
-<p><img src="images/py-script-option.png" /></p>
+<p><img src="../../images/py-script-option.png" alt="" /></p>
 <p>A segunda opção para utilização do python é usando um script python. Porém, não será tão simples reutilizar os objetos criados por cada linguagem em uma mesma sessão do R. Para usar um script python no RStudio, clique em “File” na barra de status, depois clique “New file” e finalmente em “Python script”.</p>
-<p><img src="images/py-script-option.png" /></p>
+<p><img src="../../images/py-script-option.png" alt="" /></p>
 <p>Neste post, vou utilizar o RMarkdown. Com ele, podemos inserir chunks para diversas linguagens. Ao abrir um novo arquivo RMarkdown você verá a seguinte opção:</p>
-<p><img src="images/chunks-option.png" /></p>
+<p><img src="../../images/chunks-option.png" alt="" /></p>
 <p>São essas opções que permitem usar uma ou mais linguagens em um mesmo documento.</p>
 </div>
 <div id="instalação-dos-pacotes-necessários-no-r" class="section level1">
@@ -129,11 +129,11 @@ import matplotlib.pyplot as plt</code></pre>
 <p>Checando o data frame.</p>
 <pre class="python"><code>df.head()</code></pre>
 <pre><code>##     A   B   C   D
-## 0  73  18  88  14
-## 1   8  82  20  35
-## 2  45  40  82  21
-## 3  89  74   6  16
-## 4   0  88  74  44</code></pre>
+## 0  53  60   0  29
+## 1  74  34  46   2
+## 2  85  66  64  96
+## 3  89  26  82  72
+## 4  82  74  25  23</code></pre>
 <p>Plotando um scatter plot.</p>
 <pre class="python"><code>fig = plt.figure()
 plt.scatter(df[&#39;A&#39;], df[&#39;B&#39;])
@@ -152,12 +152,12 @@ plt.show()</code></pre>
 <p>Checando o data frame no R.</p>
 <pre class="r"><code>head(r_df)</code></pre>
 <pre><code>##    A  B  C  D
-## 1 73 18 88 14
-## 2  8 82 20 35
-## 3 45 40 82 21
-## 4 89 74  6 16
-## 5  0 88 74 44
-## 6 83 13 11 59</code></pre>
+## 1 53 60  0 29
+## 2 74 34 46  2
+## 3 85 66 64 96
+## 4 89 26 82 72
+## 5 82 74 25 23
+## 6 23 53 56 72</code></pre>
 <p>Plotando.</p>
 <pre class="r"><code>r_df %&gt;% 
   ggplot(aes(x = A, y = B)) +
