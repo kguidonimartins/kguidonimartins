@@ -18,8 +18,8 @@ topics: []
 
 <p>Finalmente consegui rodar o python dentro do RMarkdown no RStudio! Minhas tentativas anteriores falharam miseravalmente. Eu até conseguia usar a biblioteca <code>pandas</code> do python, mas encontrei diversos problemas para instalar novas bibliotecas. Essa guerra durou meses!</p>
 <p>Dias atrás a galera do RStudio lançou uma nova versão do <code>{reticulate}</code> (pacote responsável pela interface do python dentro do R), que veio acompanhada de um post no blog deles (veja o post <a href="https://blog.rstudio.com/2019/12/20/reticulate-1-14/">aqui</a>). Foi através do post deles que descobri a existência do pacote <code>{rminiconda}</code>! Esse pacote resolveu todos os problemas e é justamente isso que gostaria de registrar aqui nesse post.</p>
-<div id="porque-python" class="section level1">
-<h1>Porque python?</h1>
+<div id="por-que-python" class="section level1">
+<h1>Por que python?</h1>
 <p>A primeira pergunta que pode surgir é: por que usar python? Bem, a popularidade de python tem crescido nos últimos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja <a href="https://octoverse.github.com/">aqui</a> e <a href="https://insights.stackoverflow.com/survey/2019#technology">aqui</a> o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando <a href="https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo">análise de dados para embasar suas apurações</a>.</p>
 <p>Eu adoro o R, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python (veremos isso em outros post). Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa tão difícil assim (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreria pra mim. Existem soluções para isso no <a href="https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook">Jupyter Notebook</a>, mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos para mim. Além disso, facilitaria a produção de posts para o blog (que foi criado usando o <code>{blogdown}</code>).</p>
 <p>Vamos para ver como isso funciona.</p>
@@ -129,11 +129,11 @@ import matplotlib.pyplot as plt</code></pre>
 <p>Checando o data frame.</p>
 <pre class="python"><code>df.head()</code></pre>
 <pre><code>##     A   B   C   D
-## 0  53  60   0  29
-## 1  74  34  46   2
-## 2  85  66  64  96
-## 3  89  26  82  72
-## 4  82  74  25  23</code></pre>
+## 0  33  12  74   8
+## 1   8  38  52   1
+## 2  41  32  60  72
+## 3  83   8  68  95
+## 4  54  34  93  39</code></pre>
 <p>Plotando um scatter plot.</p>
 <pre class="python"><code>fig = plt.figure()
 plt.scatter(df[&#39;A&#39;], df[&#39;B&#39;])
@@ -152,12 +152,12 @@ plt.show()</code></pre>
 <p>Checando o data frame no R.</p>
 <pre class="r"><code>head(r_df)</code></pre>
 <pre><code>##    A  B  C  D
-## 1 53 60  0 29
-## 2 74 34 46  2
-## 3 85 66 64 96
-## 4 89 26 82 72
-## 5 82 74 25 23
-## 6 23 53 56 72</code></pre>
+## 1 33 12 74  8
+## 2  8 38 52  1
+## 3 41 32 60 72
+## 4 83  8 68 95
+## 5 54 34 93 39
+## 6 71 31 70 78</code></pre>
 <p>Plotando.</p>
 <pre class="r"><code>r_df %&gt;% 
   ggplot(aes(x = A, y = B)) +

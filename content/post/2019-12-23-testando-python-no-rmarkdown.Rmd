@@ -18,7 +18,7 @@ Finalmente consegui rodar o python dentro do RMarkdown no RStudio! Minhas tentat
 
 Dias atrás a galera do RStudio lançou uma nova versão do `{reticulate}` (pacote responsável pela interface do python dentro do R), que veio acompanhada de um post no blog deles (veja o post [aqui](https://blog.rstudio.com/2019/12/20/reticulate-1-14/)). Foi através do post deles que descobri a existência do pacote `{rminiconda}`! Esse pacote resolveu todos os problemas e é justamente isso que gostaria de registrar aqui nesse post.
 
-# Porque python?
+# Por que python?
 
 A primeira pergunta que pode surgir é: por que usar python? Bem, a popularidade de python tem crescido nos últimos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja [aqui](https://octoverse.github.com/) e [aqui](https://insights.stackoverflow.com/survey/2019#technology) o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando [análise de dados para embasar suas apurações](https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo). 
 
