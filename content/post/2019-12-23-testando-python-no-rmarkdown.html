@@ -20,7 +20,7 @@ topics: []
 <div id="por-que-python" class="section level1">
 <h1>Por que python?</h1>
 <p>A popularidade de python tem crescido nos últimos, puxado especialmente pelas bibliotecas de data science (digo data science de uma maneira geral, por exemplo, manipulação e análises de dados, entre outros). Veja <a href="https://octoverse.github.com/">aqui</a> e <a href="https://insights.stackoverflow.com/survey/2019#technology">aqui</a> o crescimento do python nos últimos anos. Se você tem interesse nessa área, vale a pena aprender python. Vale lembrar que jornalistas também estão usando <a href="https://www.nexojornal.com.br/entrevista/2019/10/18/Como-o-uso-de-dados-est%C3%A1-mudando-o-jornalismo">análise de dados para embasar suas apurações</a>.</p>
-<p>Uso o R diariamente, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python. Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa difícil (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreria pra mim. Existem soluções no <a href="https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook">Jupyter Notebook</a>, mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos.</p>
+<p>Uso o R diariamente, mas algumas soluções analíticas ou mesmo de visualização só estão disponíveis em python. Por que eu ficaria preso à uma linguagem se existe a solução em outra? Instalar e usar o python não é uma tarefa difícil (especialmente no Linux). Porém, usar as duas linguagens ao mesmo tempo sempre foi uma barreira pra mim. Existem soluções no <a href="https://stackoverflow.com/questions/39008069/r-and-python-in-one-jupyter-notebook">Jupyter Notebook</a>, mas eu gostaria de usar isso no RMarkdown. Ter as duas linguagens rodando no RMarkdown dentro do RStudio seria o melhor dos dois mundos.</p>
 <p>Vamos ver como isso funciona.</p>
 </div>
 <div id="instalação-das-dependências" class="section level1">
@@ -128,11 +128,11 @@ import matplotlib.pyplot as plt</code></pre>
 <p>Checando o data frame.</p>
 <pre class="python"><code>df.head()</code></pre>
 <pre><code>##     A   B   C   D
-## 0  95  14  76  20
-## 1   4  64  14  91
-## 2  11  10  88  58
-## 3  24  61  80  69
-## 4  86  45  20  83</code></pre>
+## 0  49  53  94  76
+## 1  54   9  79  61
+## 2  53  75  26  58
+## 3  77  37  61  58
+## 4  43  73  26  12</code></pre>
 <p>Plotando um scatter plot.</p>
 <pre class="python"><code>fig = plt.figure()
 plt.scatter(df[&#39;A&#39;], df[&#39;B&#39;])
@@ -146,17 +146,17 @@ plt.show()</code></pre>
 <h1>Reutilizando objetos do python no R</h1>
 <p>Podemos reutilizar os objetos criados em python no R. Os objetos criados em python são armazenados na memória e podem ser recuperados usando o comando <code>py$</code> em chunk para R. Esse comando vai listar os objetos do python armazenados na memória. Por exemplo, insira um chunk para R e recupere o data frame usando:</p>
 <pre class="r"><code>py$df</code></pre>
-<p>Vamos atribuir o reultado do comando anterior a um objeto no R.</p>
+<p>Vamos atribuir o resultado do comando anterior a um objeto no R.</p>
 <pre class="r"><code>r_df &lt;- py$df</code></pre>
 <p>Checando o data frame no R.</p>
 <pre class="r"><code>head(r_df)</code></pre>
 <pre><code>##    A  B  C  D
-## 1 95 14 76 20
-## 2  4 64 14 91
-## 3 11 10 88 58
-## 4 24 61 80 69
-## 5 86 45 20 83
-## 6 40  8 40 79</code></pre>
+## 1 49 53 94 76
+## 2 54  9 79 61
+## 3 53 75 26 58
+## 4 77 37 61 58
+## 5 43 73 26 12
+## 6 71 91 72 56</code></pre>
 <p>Plotando.</p>
 <pre class="r"><code>r_df %&gt;% 
   ggplot(aes(x = A, y = B)) +
