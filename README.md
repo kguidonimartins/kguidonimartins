@@ -1,14 +1,13 @@
 ```r
-if (!require("devtools")) install.packages("devtools")
-if (!require("kguidonimartins")) devtools::install_github("kguidonimartins")
+install.packages("kguidonimartins")
 
 kguidonimartins::full_name()
 
-  ## Karlo Guidoni Martins
+  ## "Karlo Guidoni Martins"
 
 kguidonimartins::current_position()
 
-  ## PhD Student in Ecology & Evolution, UFG, Brazil
+  ## "PhD Student in Ecology & Evolution, UFG, Brazil"
 
 kguidonimartins::interested_in()
 
