@@ -3,7 +3,7 @@ languageCode = "en-us"
 title = "Karlo Guidoni Martins"
 theme = "blackburn"
 author = "Karlo Guidoni Martins"
-copyright = "&copy; 2020. All rights reserved."
+copyright = 'Licence: <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>'
 canonifyurls = true
 paginate = 10
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
@@ -15,12 +15,13 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [params]
   title = "Karlo Guidoni Martins"
   # Shown in the home page
-  subtitle = ""
-  brand = "Karlo Guidoni Martins"
+  subtitle = "PhD Student in Ecology & Evolution, UFG, Brazil"
+  # brand = "Karlo Guidoni Martins"
   googleAnalytics = 'UA-151898291-2'
   disqus = "kguidonimartins"
   # CSS name for highlight.js
   highlightjs = "github"
+  githubsource = "https://github.com/kguidonimartins/kguidonimartins/blob/master/content/"
   dateFormat = "02-01-2006"
   summary_length = 20
 
