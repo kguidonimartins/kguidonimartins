@@ -28,8 +28,8 @@ kguidonimartins::social()
   ## $linkedin
   ## [1] "linkedin.com/in/kguidonimartins"
   ## 
-  ## $`personal blog`
-  ## [1] "kguidonimartins.netlify.com"
+  ## $`personal site`
+  ## [1] "karloguidoni.com"
 
 kguidonimartins::location()
 
