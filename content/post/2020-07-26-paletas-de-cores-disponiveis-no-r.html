@@ -1,0 +1,120 @@
+---
+title: Paletas de cores disponíveis no R
+author: ''
+date: '2020-07-26'
+slug: paletas-de-cores-disponiveis-no-r
+categories:
+  - post
+tags:
+  - R
+  - dataviz
+description: 'Um cardápio das paletas de cores disponíveis no R'
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>O daltonismo, pelo menos pra mim, torna a busca por paletas de cores uma tarefa interessante. O que é bom pra mim, nem sempre agrada ao outro. Esse post é apenas um lembrete de acesso rápido sobre as paletas disponíveis no R por padrão.</p>
+<p>Pacotes necessários:</p>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(scales)
+library(glue)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+# tema dos plots
+theme_set(theme_void())
+# dados utilizados
+world &lt;- ne_countries(scale = &quot;medium&quot;, returnclass = &quot;sf&quot;)</code></pre>
+<p>As categorias de paletas disponíveis são essas:</p>
+<pre class="r"><code>pals &lt;- c(&quot;divergingx&quot;, &quot;qualitative&quot;, &quot;diverging&quot;, &quot;sequential&quot;)</code></pre>
+<p>Vetor identificado com os nomes das paletas:</p>
+<pre class="r"><code>available_palettes &lt;- c()
+
+for (i in seq_along(pals)) {
+  pals_vec &lt;- hcl.pals(pals[i])
+  pals_names &lt;- rep(pals[i], length(pals_vec))
+  names(pals_vec) &lt;- pals_names
+  available_palettes &lt;- c(available_palettes, pals_vec)
+}</code></pre>
+<p>Paletas disponíveis:</p>
+<pre class="r"><code>available_palettes</code></pre>
+<pre><code>##      divergingx      divergingx      divergingx      divergingx      divergingx 
+##      &quot;ArmyRose&quot;         &quot;Earth&quot;          &quot;Fall&quot;        &quot;Geyser&quot;      &quot;TealRose&quot; 
+##      divergingx      divergingx      divergingx      divergingx      divergingx 
+##         &quot;Temps&quot;          &quot;PuOr&quot;          &quot;RdBu&quot;          &quot;RdGy&quot;          &quot;PiYG&quot; 
+##      divergingx      divergingx      divergingx      divergingx      divergingx 
+##          &quot;PRGn&quot;          &quot;BrBG&quot;        &quot;RdYlBu&quot;        &quot;RdYlGn&quot;      &quot;Spectral&quot; 
+##      divergingx      divergingx     qualitative     qualitative     qualitative 
+##      &quot;Zissou 1&quot;       &quot;Cividis&quot;      &quot;Pastel 1&quot;        &quot;Dark 2&quot;        &quot;Dark 3&quot; 
+##     qualitative     qualitative     qualitative     qualitative     qualitative 
+##         &quot;Set 2&quot;         &quot;Set 3&quot;          &quot;Warm&quot;          &quot;Cold&quot;      &quot;Harmonic&quot; 
+##     qualitative       diverging       diverging       diverging       diverging 
+##       &quot;Dynamic&quot;      &quot;Blue-Red&quot;    &quot;Blue-Red 2&quot;    &quot;Blue-Red 3&quot;     &quot;Red-Green&quot; 
+##       diverging       diverging       diverging       diverging       diverging 
+##  &quot;Purple-Green&quot;  &quot;Purple-Brown&quot;   &quot;Green-Brown&quot; &quot;Blue-Yellow 2&quot; &quot;Blue-Yellow 3&quot; 
+##       diverging       diverging       diverging       diverging       diverging 
+##  &quot;Green-Orange&quot;  &quot;Cyan-Magenta&quot;        &quot;Tropic&quot;          &quot;Broc&quot;          &quot;Cork&quot; 
+##       diverging       diverging       diverging       diverging      sequential 
+##           &quot;Vik&quot;        &quot;Berlin&quot;        &quot;Lisbon&quot;        &quot;Tofino&quot;         &quot;Grays&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##   &quot;Light Grays&quot;       &quot;Blues 2&quot;       &quot;Blues 3&quot;     &quot;Purples 2&quot;     &quot;Purples 3&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##        &quot;Reds 2&quot;        &quot;Reds 3&quot;      &quot;Greens 2&quot;      &quot;Greens 3&quot;          &quot;Oslo&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##   &quot;Purple-Blue&quot;    &quot;Red-Purple&quot;      &quot;Red-Blue&quot; &quot;Purple-Orange&quot; &quot;Purple-Yellow&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##   &quot;Blue-Yellow&quot;  &quot;Green-Yellow&quot;    &quot;Red-Yellow&quot;          &quot;Heat&quot;        &quot;Heat 2&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##       &quot;Terrain&quot;     &quot;Terrain 2&quot;       &quot;Viridis&quot;        &quot;Plasma&quot;       &quot;Inferno&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##     &quot;Dark Mint&quot;          &quot;Mint&quot;        &quot;BluGrn&quot;          &quot;Teal&quot;       &quot;TealGrn&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##         &quot;Emrld&quot;         &quot;BluYl&quot;      &quot;ag_GrnYl&quot;         &quot;Peach&quot;        &quot;PinkYl&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##          &quot;Burg&quot;        &quot;BurgYl&quot;         &quot;RedOr&quot;         &quot;OrYel&quot;          &quot;Purp&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##        &quot;PurpOr&quot;        &quot;Sunset&quot;       &quot;Magenta&quot;    &quot;SunsetDark&quot;     &quot;ag_Sunset&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##        &quot;BrwnYl&quot;        &quot;YlOrRd&quot;        &quot;YlOrBr&quot;          &quot;OrRd&quot;       &quot;Oranges&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##          &quot;YlGn&quot;        &quot;YlGnBu&quot;          &quot;Reds&quot;          &quot;RdPu&quot;          &quot;PuRd&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##       &quot;Purples&quot;        &quot;PuBuGn&quot;          &quot;PuBu&quot;        &quot;Greens&quot;          &quot;BuGn&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##          &quot;GnBu&quot;          &quot;BuPu&quot;         &quot;Blues&quot;       &quot;Lajolla&quot;         &quot;Turku&quot;</code></pre>
+<p>Vou utilizar as estimativas de tamanho populacional por países para exibir as paletas:</p>
+<pre class="r"><code>for (i in seq_along(available_palettes)) {
+  plot_pals &lt;- ggplot() +
+    geom_sf(data = world, aes(fill = pop_est)) +
+    scale_fill_gradientn(
+        colours = hcl.colors(
+          n = 20,
+          palette = paste(available_palettes[i])
+        ),
+        labels = comma_format(),
+        n.breaks = 10,
+        breaks = breaks_extended(n = 10)
+      ) +
+    labs(
+      title = glue(&quot;hcl.pals(&#39;{names(available_palettes[i])}&#39;)&quot;),
+      subtitle = glue(&quot;use: hcl.colors(n = 20, palette = &#39;{available_palettes[i]}&#39;)&quot;),
+      color = &quot;vp_flow&quot;
+    )
+  print(plot_pals)
+}</code></pre>
+<p><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-2.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-3.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-4.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-5.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-6.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-7.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-8.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-9.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-10.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-11.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-12.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-13.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-14.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-15.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-16.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-17.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-18.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-19.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-20.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-21.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-22.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-23.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-24.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-25.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-26.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-27.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-28.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-29.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-30.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-31.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-32.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-33.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-34.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-35.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-36.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-37.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-38.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-39.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-40.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-41.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-42.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-43.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-44.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-45.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-46.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-47.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-48.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-49.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-50.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-51.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-52.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-53.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-54.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-55.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-56.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-57.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-58.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-59.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-60.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-61.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-62.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-63.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-64.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-65.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-66.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-67.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-68.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-69.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-70.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-71.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-72.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-73.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-74.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-75.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-76.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-77.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-78.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-79.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-80.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-81.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-82.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-83.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-84.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-85.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-86.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-87.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-88.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-89.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-90.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-91.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-92.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-93.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-94.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-95.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-96.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-97.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-98.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-99.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-100.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-101.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-102.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-103.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-104.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-105.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-106.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-107.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-108.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-109.png" width="672" /><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-110.png" width="672" /></p>
+<p>Escolho a paleta e utilizo no plot, por exemplo:</p>
+<pre class="r"><code>ggplot() +
+    geom_sf(data = world, aes(fill = pop_est)) +
+    scale_fill_gradientn(
+        colours = hcl.colors(
+          n = 20,
+          palette = &quot;Viridis&quot; # paleta escolhida
+        ),
+        labels = comma_format(),
+        n.breaks = 10,
+        breaks = breaks_extended(n = 10)
+      )</code></pre>
+<p><img src="/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>

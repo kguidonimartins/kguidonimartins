@@ -1,0 +1,97 @@
+---
+title: Paletas de cores disponíveis no R
+author: ''
+date: '2020-07-26'
+slug: paletas-de-cores-disponiveis-no-r
+categories:
+  - post
+tags:
+  - R
+  - dataviz
+description: 'Um cardápio das paletas de cores disponíveis no R'
+---
+
+O daltonismo, pelo menos pra mim, torna a busca por paletas de cores uma tarefa interessante. O que é bom pra mim, nem sempre agrada ao outro. Esse post é apenas um lembrete de acesso rápido sobre as paletas disponíveis no R por padrão.
+
+Pacotes necessários:
+
+```{r, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(scales)
+library(glue)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+# tema dos plots
+theme_set(theme_void())
+# dados utilizados
+world <- ne_countries(scale = "medium", returnclass = "sf")
+```
+
+As categorias de paletas disponíveis são essas:
+
+```{r}
+pals <- c("divergingx", "qualitative", "diverging", "sequential")
+```
+
+Vetor identificado com os nomes das paletas:
+
+```{r}
+available_palettes <- c()
+
+for (i in seq_along(pals)) {
+  pals_vec <- hcl.pals(pals[i])
+  pals_names <- rep(pals[i], length(pals_vec))
+  names(pals_vec) <- pals_names
+  available_palettes <- c(available_palettes, pals_vec)
+}
+```
+
+Paletas disponíveis:
+
+```{r}
+available_palettes
+```
+
+Vou utilizar as estimativas de tamanho populacional por países para exibir as paletas:
+
+```{r}
+for (i in seq_along(available_palettes)) {
+  plot_pals <- ggplot() +
+    geom_sf(data = world, aes(fill = pop_est)) +
+    scale_fill_gradientn(
+        colours = hcl.colors(
+          n = 20,
+          palette = paste(available_palettes[i])
+        ),
+        labels = comma_format(),
+        n.breaks = 10,
+        breaks = breaks_extended(n = 10)
+      ) +
+    labs(
+      title = glue("hcl.pals('{names(available_palettes[i])}')"),
+      subtitle = glue("use: hcl.colors(n = 20, palette = '{available_palettes[i]}')"),
+      color = "vp_flow"
+    )
+  print(plot_pals)
+}
+```
+
+Escolho a paleta e utilizo no plot, por exemplo:
+
+```{r}
+ggplot() +
+    geom_sf(data = world, aes(fill = pop_est)) +
+    scale_fill_gradientn(
+        colours = hcl.colors(
+          n = 20,
+          palette = "Viridis" # paleta escolhida
+        ),
+        labels = comma_format(),
+        n.breaks = 10,
+        breaks = breaks_extended(n = 10)
+      )
+```
+
+
