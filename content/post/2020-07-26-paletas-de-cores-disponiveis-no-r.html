@@ -11,54 +11,82 @@ tags:
 description: 'Um cardápio das paletas de cores disponíveis no R'
 ---
 
-O daltonismo, pelo menos pra mim, torna a busca por paletas de cores uma tarefa interessante. Esse post é apenas um lembrete de acesso rápido sobre as paletas disponíveis no R por padrão. Eu mostro como utilizar em gráficos (por exemplo, no `{ggplot2}`) e como extrair os códigos hexadecimais das cores das paletas. Vale a pena dar uma olhada [aqui](https://www.color-hex.com/) também.
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
-Pacotes necessários:
 
-```{r, message=FALSE}
-if (!require("ggplot2")) install.packages("ggplot2")
-if (!require("dplyr")) install.packages("dplyr")
-if (!require("scales")) install.packages("scales")
-if (!require("glue")) install.packages("glue")
-if (!require("sf")) install.packages("sf")
-if (!require("rnaturalearth")) install.packages("rnaturalearth")
-if (!require("rnaturalearthdata")) install.packages("rnaturalearthdata")
+<p>O daltonismo, pelo menos pra mim, torna a busca por paletas de cores uma tarefa interessante. Esse post é apenas um lembrete de acesso rápido sobre as paletas disponíveis no R por padrão. Eu mostro como utilizar em gráficos (por exemplo, no <code>{ggplot2}</code>) e como extrair os códigos hexadecimais das cores das paletas. Vale a pena dar uma olhada <a href="https://www.color-hex.com/">aqui</a> também.</p>
+<p>Pacotes necessários:</p>
+<pre class="r"><code>if (!require(&quot;ggplot2&quot;)) install.packages(&quot;ggplot2&quot;)
+if (!require(&quot;dplyr&quot;)) install.packages(&quot;dplyr&quot;)
+if (!require(&quot;scales&quot;)) install.packages(&quot;scales&quot;)
+if (!require(&quot;glue&quot;)) install.packages(&quot;glue&quot;)
+if (!require(&quot;sf&quot;)) install.packages(&quot;sf&quot;)
+if (!require(&quot;rnaturalearth&quot;)) install.packages(&quot;rnaturalearth&quot;)
+if (!require(&quot;rnaturalearthdata&quot;)) install.packages(&quot;rnaturalearthdata&quot;)
 # tema dos plots
 theme_set(theme_void())
 # dados utilizados
-world <- ne_countries(scale = "medium", returnclass = "sf")
-```
-
-As categorias de paletas disponíveis são essas:
-
-```{r}
-pals <- c("divergingx", "qualitative", "diverging", "sequential")
-```
-
-Vetor identificado com os nomes das paletas:
-
-```{r}
-available_palettes <- c()
+world &lt;- ne_countries(scale = &quot;medium&quot;, returnclass = &quot;sf&quot;)</code></pre>
+<p>As categorias de paletas disponíveis são essas:</p>
+<pre class="r"><code>pals &lt;- c(&quot;divergingx&quot;, &quot;qualitative&quot;, &quot;diverging&quot;, &quot;sequential&quot;)</code></pre>
+<p>Vetor identificado com os nomes das paletas:</p>
+<pre class="r"><code>available_palettes &lt;- c()
 
 for (i in seq_along(pals)) {
-  pals_vec <- hcl.pals(pals[i])
-  pals_names <- rep(pals[i], length(pals_vec))
-  names(pals_vec) <- pals_names
-  available_palettes <- c(available_palettes, pals_vec)
-}
-```
-
-Um total de `r length(available_palettes)` paletas disponíveis!
-
-```{r}
-available_palettes
-```
-
-Vou utilizar as estimativas de tamanho populacional por países para exibir as paletas:
-
-```{r, eval = FALSE}
-for (i in seq_along(available_palettes)) {
-  plot_pals <- ggplot() +
+  pals_vec &lt;- hcl.pals(pals[i])
+  pals_names &lt;- rep(pals[i], length(pals_vec))
+  names(pals_vec) &lt;- pals_names
+  available_palettes &lt;- c(available_palettes, pals_vec)
+}</code></pre>
+<p>Um total de 110 paletas disponíveis!</p>
+<pre class="r"><code>available_palettes</code></pre>
+<pre><code>##      divergingx      divergingx      divergingx      divergingx      divergingx 
+##      &quot;ArmyRose&quot;         &quot;Earth&quot;          &quot;Fall&quot;        &quot;Geyser&quot;      &quot;TealRose&quot; 
+##      divergingx      divergingx      divergingx      divergingx      divergingx 
+##         &quot;Temps&quot;          &quot;PuOr&quot;          &quot;RdBu&quot;          &quot;RdGy&quot;          &quot;PiYG&quot; 
+##      divergingx      divergingx      divergingx      divergingx      divergingx 
+##          &quot;PRGn&quot;          &quot;BrBG&quot;        &quot;RdYlBu&quot;        &quot;RdYlGn&quot;      &quot;Spectral&quot; 
+##      divergingx      divergingx     qualitative     qualitative     qualitative 
+##      &quot;Zissou 1&quot;       &quot;Cividis&quot;      &quot;Pastel 1&quot;        &quot;Dark 2&quot;        &quot;Dark 3&quot; 
+##     qualitative     qualitative     qualitative     qualitative     qualitative 
+##         &quot;Set 2&quot;         &quot;Set 3&quot;          &quot;Warm&quot;          &quot;Cold&quot;      &quot;Harmonic&quot; 
+##     qualitative       diverging       diverging       diverging       diverging 
+##       &quot;Dynamic&quot;      &quot;Blue-Red&quot;    &quot;Blue-Red 2&quot;    &quot;Blue-Red 3&quot;     &quot;Red-Green&quot; 
+##       diverging       diverging       diverging       diverging       diverging 
+##  &quot;Purple-Green&quot;  &quot;Purple-Brown&quot;   &quot;Green-Brown&quot; &quot;Blue-Yellow 2&quot; &quot;Blue-Yellow 3&quot; 
+##       diverging       diverging       diverging       diverging       diverging 
+##  &quot;Green-Orange&quot;  &quot;Cyan-Magenta&quot;        &quot;Tropic&quot;          &quot;Broc&quot;          &quot;Cork&quot; 
+##       diverging       diverging       diverging       diverging      sequential 
+##           &quot;Vik&quot;        &quot;Berlin&quot;        &quot;Lisbon&quot;        &quot;Tofino&quot;         &quot;Grays&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##   &quot;Light Grays&quot;       &quot;Blues 2&quot;       &quot;Blues 3&quot;     &quot;Purples 2&quot;     &quot;Purples 3&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##        &quot;Reds 2&quot;        &quot;Reds 3&quot;      &quot;Greens 2&quot;      &quot;Greens 3&quot;          &quot;Oslo&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##   &quot;Purple-Blue&quot;    &quot;Red-Purple&quot;      &quot;Red-Blue&quot; &quot;Purple-Orange&quot; &quot;Purple-Yellow&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##   &quot;Blue-Yellow&quot;  &quot;Green-Yellow&quot;    &quot;Red-Yellow&quot;          &quot;Heat&quot;        &quot;Heat 2&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##       &quot;Terrain&quot;     &quot;Terrain 2&quot;       &quot;Viridis&quot;        &quot;Plasma&quot;       &quot;Inferno&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##     &quot;Dark Mint&quot;          &quot;Mint&quot;        &quot;BluGrn&quot;          &quot;Teal&quot;       &quot;TealGrn&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##         &quot;Emrld&quot;         &quot;BluYl&quot;      &quot;ag_GrnYl&quot;         &quot;Peach&quot;        &quot;PinkYl&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##          &quot;Burg&quot;        &quot;BurgYl&quot;         &quot;RedOr&quot;         &quot;OrYel&quot;          &quot;Purp&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##        &quot;PurpOr&quot;        &quot;Sunset&quot;       &quot;Magenta&quot;    &quot;SunsetDark&quot;     &quot;ag_Sunset&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##        &quot;BrwnYl&quot;        &quot;YlOrRd&quot;        &quot;YlOrBr&quot;          &quot;OrRd&quot;       &quot;Oranges&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##          &quot;YlGn&quot;        &quot;YlGnBu&quot;          &quot;Reds&quot;          &quot;RdPu&quot;          &quot;PuRd&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##       &quot;Purples&quot;        &quot;PuBuGn&quot;          &quot;PuBu&quot;        &quot;Greens&quot;          &quot;BuGn&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##          &quot;GnBu&quot;          &quot;BuPu&quot;         &quot;Blues&quot;       &quot;Lajolla&quot;         &quot;Turku&quot;</code></pre>
+<p>Vou utilizar as estimativas de tamanho populacional por países para exibir as paletas:</p>
+<pre class="r"><code>for (i in seq_along(available_palettes)) {
+  plot_pals &lt;- ggplot() +
     geom_sf(data = world, aes(fill = pop_est)) +
     scale_fill_gradientn(
         colours = hcl.colors(
@@ -70,25 +98,13 @@ for (i in seq_along(available_palettes)) {
         breaks = breaks_extended(n = 10)
       ) +
     labs(
-      title = glue("hcl.pals('{names(available_palettes[i])}')"),
-      subtitle = glue("use: hcl.colors(n = 20, palette = '{available_palettes[i]}')"),
-      color = "vp_flow"
+      title = glue(&quot;hcl.pals(&#39;{names(available_palettes[i])}&#39;)&quot;),
+      subtitle = glue(&quot;use: hcl.colors(n = 20, palette = &#39;{available_palettes[i]}&#39;)&quot;),
+      color = &quot;vp_flow&quot;
     )
   print(plot_pals)
-}
-```
-
-```{r, eval = FALSE, echo = FALSE, results="asis"}
-
-figuras <- list.files("static/post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/")
-
-for (i in seq_along(figuras)) {
-  print(glue('<img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/{figuras[i]}" alt="" width="800" />'))
-}
-
-```
-
-<img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-1.png" alt="" width="800" />
+}</code></pre>
+<p><img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-1.png" alt="" width="800" />
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-2.png" alt="" width="800" />
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-3.png" alt="" width="800" />
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-4.png" alt="" width="800" />
@@ -197,30 +213,22 @@ for (i in seq_along(figuras)) {
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-107.png" alt="" width="800" />
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-108.png" alt="" width="800" />
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-109.png" alt="" width="800" />
-<img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-110.png" alt="" width="800" />
-
-Escolho a paleta e utilizo no plot, por exemplo:
-
-```{r, eval = FALSE}
-ggplot() +
+<img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-110.png" alt="" width="800" /></p>
+<p>Escolho a paleta e utilizo no plot, por exemplo:</p>
+<pre class="r"><code>ggplot() +
     geom_sf(data = world, aes(fill = pop_est)) +
     scale_fill_gradientn(
         colours = hcl.colors(
           n = 20,
-          palette = "Viridis" # paleta escolhida
+          palette = &quot;Viridis&quot; # paleta escolhida
         ),
         labels = comma_format(),
         n.breaks = 10,
         breaks = breaks_extended(n = 10)
-      )
-```
-
-<img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-6-1.png" alt="" width="800" />
-
-Posso também extrair os códigos hexadecimais das cores da paleta e usar em outro programa:
-
-```{r}
-hcl.colors(n = 20, "Viridis")
-```
-
-
+      )</code></pre>
+<p><img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-6-1.png" alt="" width="800" /></p>
+<p>Posso também extrair os códigos hexadecimais das cores da paleta e usar em outro programa:</p>
+<pre class="r"><code>hcl.colors(n = 20, &quot;Viridis&quot;)</code></pre>
+<pre><code>##  [1] &quot;#4B0055&quot; &quot;#491562&quot; &quot;#432A6F&quot; &quot;#383B7A&quot; &quot;#214C85&quot; &quot;#005C8D&quot; &quot;#006B93&quot;
+##  [8] &quot;#007A96&quot; &quot;#008898&quot; &quot;#009597&quot; &quot;#00A193&quot; &quot;#00AD8D&quot; &quot;#00B884&quot; &quot;#00C279&quot;
+## [15] &quot;#46CA6B&quot; &quot;#76D25A&quot; &quot;#9CD948&quot; &quot;#BFDE36&quot; &quot;#DFE22B&quot; &quot;#FDE333&quot;</code></pre>
