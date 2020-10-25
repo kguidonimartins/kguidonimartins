@@ -38,3 +38,6 @@ kguidonimartins::location()
   ##   <dbl> <dbl>
   ## 1 -16.6 -49.3
 ```
+
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
