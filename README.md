@@ -1,3 +1,5 @@
+<!--
+
 ```r
 install.packages("kguidonimartins")
 
@@ -39,7 +41,7 @@ kguidonimartins::location()
   ## 1 -16.6 -49.3
 ```
 
-<!--START_SECTION:waka-->
+
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-1-blue)
 
 **🐱 My Github Data** 
@@ -123,4 +125,6 @@ Python                   3 repos             █░░░░░░░░░░�
 ![Chart not found](https://github.com/kguidonimartins/kguidonimartins/blob/master/charts/bar_graph.png) 
 
 
-<!--END_SECTION:waka-->
+
+
+-->
