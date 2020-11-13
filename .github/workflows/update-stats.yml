@@ -7,7 +7,7 @@ name: Waka Readme
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   update-readme:
