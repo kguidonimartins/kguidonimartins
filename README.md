@@ -1,5 +1,3 @@
-<!--
-
 ```r
 install.packages("kguidonimartins")
 
@@ -118,13 +116,3 @@ Shell                    6 repos             ██░░░░░░░░░�
 Python                   3 repos             █░░░░░░░░░░░░░░░░░░░░░░░░   4.35%
 
 ```
-
-
-**Timeline**
-
-![Chart not found](https://github.com/kguidonimartins/kguidonimartins/blob/master/charts/bar_graph.png) 
-
-
-
-
--->
