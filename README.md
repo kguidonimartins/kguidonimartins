@@ -1,3 +1,4 @@
+<!--
 ```r
 install.packages("kguidonimartins")
 
@@ -38,8 +39,7 @@ kguidonimartins::location()
   ##   <dbl> <dbl>
   ## 1 -16.6 -49.3
 ```
-
-
+--> 
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-1-blue)
 
 **🐱 My Github Data** 
