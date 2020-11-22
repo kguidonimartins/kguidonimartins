@@ -1,14 +1,15 @@
 name: Waka Readme
 
-#on:
-# schedule:
-#    # Runs at 21:00 -03
-#    - cron: '00 00 * * *'
-
 on:
-  push:
-    branches:
-      - master
+ schedule:
+    # Runs at 21:00 -03
+    - cron: '00 00 * * *'
+
+## use this only for configuration (infinite loop)
+#on:
+#  push:
+#    branches:
+#      - master
 
 jobs:
   update-readme:
