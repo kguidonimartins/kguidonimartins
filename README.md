@@ -46,7 +46,7 @@ kguidonimartins::location()
 
 **🐱 My Github Data** 
 
-> 🏆 3,044 Contributions in the Year 2020
+> 🏆 3,046 Contributions in the Year 2020
  > 
 > 📦 4.6 MB Used in Github's Storage 
  > 
