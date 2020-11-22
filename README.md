@@ -40,6 +40,8 @@ kguidonimartins::location()
   ## 1 -16.6 -49.3
 ```
 --> 
+  
+<!--START_SECTION:waka-->
 ![Profile Views](http://img.shields.io/badge/Profile%20Views-1-blue)
 
 **🐱 My Github Data** 
@@ -116,3 +118,5 @@ Shell                    6 repos             ██░░░░░░░░░�
 Python                   3 repos             █░░░░░░░░░░░░░░░░░░░░░░░░   4.35%
 
 ```
+
+<!--END_SECTION:waka-->
