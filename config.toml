@@ -6,7 +6,7 @@ author = "Karlo Guidoni"
 copyright = 'Licence: <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>'
 canonifyurls = true
 paginate = 10
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
 
 [indexes]
   tag = "tags"
@@ -45,49 +45,62 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 3
     identifier = "tags"
     url = "/tags/"
-  [[menu.main]]
-    name = "About"
-    pre = "<i class='fa fa-question-circle fa-fw'></i>"
-    weight = 4
-    identifier = "about"
-    url = "/about/"
-  # [[menu.main]]
-  #   name = "Bio"
-  #   pre = "<i class='fa fa-id-card fa-fw'></i>"
-  #   weight = 5
-  #   identifier = "bio"
-  #   url = "/bio/"
+#  [[menu.main]]
+#    name = "Bio"
+#    pre = "<i class='fa fa-id-card fa-fw'></i>"
+#    weight = 4
+#    identifier = "bio"
+#    url = "/bio/"
+#  [[menu.main]]
+#    name = "TIL"
+#    pre = "<i class='fas fa-pencil-alt fa-fw'></i>"
+#    weight = 5
+#    identifier = "til"
+#    url = "/til/"
 #  [[menu.main]]
 #    name = "Talks"
 #    pre = "<i class='fa fa-microphone fa-fw'></i>"
 #    weight = 6
 #    identifier = "talks"
 #    url = "/talks/"
-  # [[menu.main]]
-  #   name = "Publications"
-  #   pre = "<i class='fa fa-file fa-fw'></i>"
-  #   weight = 7
-  #   identifier = "papers"
-  #   url = "/papers/"
-  # [[menu.main]]
-  #   name = "Contact"
-  #   pre = "<i class='fa fa-phone fa-fw'></i>"
-  #   weight = 8
-  #   url = "/contact/"
+#  [[menu.main]]
+#    name = "CV"
+#    pre = "<i class='fa fa-paperclip fa-fw'></i>"
+#    weight = 6
+#    identifier = "cv"
+#    url = "/cv/"
+#   [[menu.main]]
+#     name = "Publications"
+#     pre = "<i class='fa fa-newspaper-o fa-fw'></i>"
+#     weight = 7
+#     identifier = "papers"
+#     url = "/papers/"
+#  [[menu.main]]
+#    name = "Portfolio"
+#    pre = "<i class='fa fa-bar-chart fa-fw'></i>"
+#    weight = 8
+#    url = "/portfolio/"
+  [[menu.main]]
+    name = "About"
+    pre = "<i class='fa fa-question-circle fa-fw'></i>"
+    weight = 9
+    identifier = "about"
+    url = "/about/"
 
 [social]
   # Link your social networking accouns to the side menu
   # by entering your username or ID.
-  facebook = ""
-  instagram = ""
+#  facebook = ""
+#  instagram = ""
   github = "kguidonimartins"
-  stackoverflow = ""
-  linkedin = "kguidonimartins"
-  email = "kguidonimartins@gmail.com"
-  keybase = ""
-  # orcid = "0000-0002-8458-8467"
-  researchgate = "Karlo_Gregorio_Guidoni-Martins"
-  twitter = "kguidonimartins"
+#  stackoverflow = "5974372"
+#  linkedin = "kguidonimartins"
+  email = "kguidonimartins"
+#  keybase = ""
+  orcid = "0000-0002-8458-8467"
+#  researchgate = "Karlo_Gregorio_Guidoni-Martins"
+#  twitter = "kguidonimartins"
+#  til = "vimwiki"
 
 [markup.highlight]
   codeFences = true
