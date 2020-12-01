@@ -1,17 +1,70 @@
-{{ partial "header.html" . }}
+<!--
+  {{ partial "header.html" . }}
 
-<div class="header">
+  <div class="header">
   <h1>{{ .Title }}</h1>
-  <h2>{{ .Site.Params.subtitle }}</h2>
-</div>
+  <h2>{{ .Description }}</h2>
+  </div>
+  <div class="content">
+  {{ .Content }}
+  </div>
 
-<div class="content">
-  {{ range ( .Paginate (where .Data.Pages "Type" "post")).Pages }}
-    {{ .Render "summary"}}
-  {{ end }}
+  {{ partial "footer.html" . }}
+-->
 
-  {{ partial "pagination.html" . }}
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    html {
+      align-items: center;
+      color: #282A36;
+      display: flex;
+      font: 18px/1 "Ubuntu Mono", monospace;
+      height: 100%;
+      justify-content: center;
+    }
 
-</div>
+    ul {
+        padding-left: 10px;
+        margin: 10px 0;
+    }
 
-{{ partial "footer.html" . }}
+    li{
+      margin: 3px 0;
+    }
+
+    li:not(:last-child) {
+        margin-bottom: 5px;
+    }
+
+    a:focus,
+    a:hover {
+      font-weight: bold;
+    }
+
+    nav {
+      column-gap: 3em;
+      display: grid;
+      padding: 1em 0;
+    }
+
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <h2>Karlo Guidoni</h2>
+      <p>Computadores fazem arte.</p>
+      <ul>
+        <li>links</li>
+        <ul>
+          <li><a href="https://orcid.org/0000-0002-8458-8467">orcid</a><br/></li>
+          <li><a href="https://github.com/kguidonimartins">github</a><br/></li>
+          <li><a href="https://karloguidoni.com/post/">blog</a><br/></li>
+        </ul>
+      </ul>
+    </nav>
+
+  </body>
+</html>
