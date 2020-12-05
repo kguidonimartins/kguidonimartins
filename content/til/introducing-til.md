@@ -2,7 +2,6 @@
 title: Apresentando o Hoje Eu Aprendi
 author: ''
 date: '2020-12-04'
-slug: introducing-til
 categories:
   - til
 tags:

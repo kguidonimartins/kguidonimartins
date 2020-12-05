@@ -2,7 +2,6 @@
 title: Revertendo a branch do repositório para um commit antigo
 author: 'Karlo Guidoni'
 date: '2020-12-05'
-slug: introducing-til
 categories:
   - til
 tags:
