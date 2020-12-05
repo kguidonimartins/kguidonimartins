@@ -1,0 +1,27 @@
+{{ partial "blog_header.html" . }}
+
+<div class="header">
+  <h1>{{ .Title }}</h1>
+  <h2>{{ .Description }}</h2>
+</div>
+<div class="content">
+
+  {{ partial "post_meta.html" . }}
+
+  {{ .Content }}
+
+  {{ partial "prev_next_post.html" . }}
+
+</div>
+
+
+<script src="https://utteranc.es/client.js"
+        repo="kguidonimartins/kguidonimartins"
+        issue-term="title"
+        label="comments :speech_balloon:"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+{{ partial "footer.html" . }}
