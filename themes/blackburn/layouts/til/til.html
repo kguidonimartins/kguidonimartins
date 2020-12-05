@@ -1,7 +1,8 @@
 {{ partial "header.html" . }}
 
 <div class="header">
-  <h1>{{ .Title }}</h1>
+  <h1>TIL</h1>
+  <p><b>TIL</b> também conhecido como <a href="https://karloguidoni.com/til/introducing-til/"><b>Hoje Eu Aprendi</b></a>.</p>
 </div>
 <div class="content">
   {{ range .Data.Pages.GroupByDate "2006" }}
