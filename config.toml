@@ -18,7 +18,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\
   subtitle = ""
   # brand = "Karlo Guidoni Martins"
   googleAnalytics = 'UA-151898291-2'
-  disqus = "kguidonimartins"
+  # disqus = "kguidonimartins"
   # CSS name for highlight.js
   highlightjs = "github"
   githubsource = "https://github.com/kguidonimartins/kguidonimartins/blob/master/content/"
@@ -34,15 +34,21 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\
     identifier = "home"
     url = "/"
   [[menu.main]]
-    name = "Posts by date"
+    name = "Posts"
     pre = "<i class='fa fa-list fa-fw'></i>"
     weight = 2
     identifier = "post"
     url = "/post/"
   [[menu.main]]
-    name = "Posts by tag"
-    pre = "<i class='fa fa-tags fa-fw'></i>"
+    name = "TIL"
+    pre = "<i class='fas fa-pencil-alt fa-fw'></i>"
     weight = 3
+    identifier = "til"
+    url = "/til/"
+  [[menu.main]]
+    name = "Tags"
+    pre = "<i class='fa fa-tags fa-fw'></i>"
+    weight = 4
     identifier = "tags"
     url = "/tags/"
 #  [[menu.main]]
@@ -51,12 +57,6 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\
 #    weight = 4
 #    identifier = "bio"
 #    url = "/bio/"
-#  [[menu.main]]
-#    name = "TIL"
-#    pre = "<i class='fas fa-pencil-alt fa-fw'></i>"
-#    weight = 5
-#    identifier = "til"
-#    url = "/til/"
 #  [[menu.main]]
 #    name = "Talks"
 #    pre = "<i class='fa fa-microphone fa-fw'></i>"
@@ -105,9 +105,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\
 [markup.highlight]
   codeFences = true
   hl_Lines = ""
-  lineNoStart = 1
-  lineNos = true
   lineNumbersInTable = true
   noClasses = true
   style = "tango"
   tabWidth = 2
+  # lineNoStart = 1
+  # lineNos = true
