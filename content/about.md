@@ -5,7 +5,7 @@ sidemenu: "true"
 title: About
 ---
 
-Meu nome é Karlo Guidoni Martins. Atualmente, sou estudante de doutorado em Ecologia e Evolução na Universidade Federal de Goiás. Esta página funciona como um caderno de anotações para mim. As postagens variam entre programação, fluxo de trabalho diário e coisas que tenho aprendido. 
+Meu nome é Karlo Guidoni Martins. Atualmente, sou estudante de doutorado em Ecologia e Evolução na Universidade Federal de Goiás. Esta página funciona como um caderno de anotações para mim. As postagens variam entre programação, fluxo de trabalho diário e coisas que tenho aprendido.
 
 Os links para meus perfis em algumas redes sociais e o meu endereço de e-mail estão no painel à esquerda.
 

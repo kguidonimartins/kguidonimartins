@@ -13,7 +13,7 @@ description: 'Aprenda a gerar queries em SQL usando o pacote `dbplyr`'
 topics: []
 ---
 
-O meta-pacote [`tidyverse`](https://www.tidyverse.org/) tem sido o meu grande aliado no dia-a-dia. Ele tem funcionado como um canivete suíço para leitura, manipulação e visualização de dados. A facilidade para acesso e para consultas a banco de dados não é surpresa, especialmente se você está acostumado aos verbos do pacote [`dplyr`](https://dplyr.tidyverse.org/). Esse tipo de operação não faz parte da minha rotina, mas eu já precisei acessar e fazer consultas em um banco de dados do tipo SQL. Novamente, o `tidyverse` junto com o `dbplyr` cumpriram seus papéis de forma elegante. 
+O meta-pacote [`tidyverse`](https://www.tidyverse.org/) tem sido o meu grande aliado no dia-a-dia. Ele tem funcionado como um canivete suíço para leitura, manipulação e visualização de dados. A facilidade para acesso e para consultas a banco de dados não é surpresa, especialmente se você está acostumado aos verbos do pacote [`dplyr`](https://dplyr.tidyverse.org/). Esse tipo de operação não faz parte da minha rotina, mas eu já precisei acessar e fazer consultas em um banco de dados do tipo SQL. Novamente, o `tidyverse` junto com o `dbplyr` cumpriram seus papéis de forma elegante.
 
 O resumo da ópera é o seguinte: se você não sabe escrever queries em SQL, o pacote `dbplyr` vai escrevê-las para você. Basicamente, você escreve as manipulações usando o `dplyr` (e amigos) e o `dbplyr` traduz para SQL. Veremos como isso funciona.
 
@@ -22,13 +22,13 @@ O resumo da ópera é o seguinte: se você não sabe escrever queries em SQL, o 
 Instale os pacotes necessários.
 
 ```{r, message=FALSE}
-if (!require("DBI")) 
+if (!require("DBI"))
   install.packages("DBI")
-if (!require("RSQLite")) 
+if (!require("RSQLite"))
   install.packages("RSQLite")
-if (!require("tidyverse")) 
+if (!require("tidyverse"))
   install.packages("tidyverse")
-if (!require("dbplyr")) 
+if (!require("dbplyr"))
   install.packages("dbplyr")
 ```
 
@@ -45,12 +45,12 @@ Vamos criar um banco de dados em memória usando o dataset `mtcars`. São `r nro
 mtcars
 ```
 
-O primeiro passo é criar uma conexão em memória: 
+O primeiro passo é criar uma conexão em memória:
 
 ```{r}
-connection_to_db <- 
+connection_to_db <-
   DBI::dbConnect(
-    drv = RSQLite::SQLite(), 
+    drv = RSQLite::SQLite(),
     ":memory:"
     )
 
@@ -61,10 +61,10 @@ connection_to_db
 Depois, incorporamos o dataset a esse banco.
 
 ```{r}
-mtcars_on_db <- 
+mtcars_on_db <-
   mtcars %>%                      # dataset
   rownames_to_column("cars") %>%  # transformando o nome da linhas em uma coluna
-  copy_to(                          
+  copy_to(
     dest = connection_to_db,      # nosso banco em memória
     name = "table-mtcars"         # nome da nossa tabela no banco (opcional)
     )
@@ -76,7 +76,7 @@ mtcars_on_db
 O resultado `[?? x 11]` na primeira linha significa que não foram informadas todas as linhas da tabela. Isso acontece também com outros tipos de consultas. Quando o resultado da consulta excede 10 linhas, precisamos usar a função `collect()`.
 
 ```{r}
-mtcars_on_db %>% 
+mtcars_on_db %>%
   collect()
 ```
 
@@ -115,19 +115,19 @@ mtcars_on_db %>%        # nosso banco em memória
 Para ver como isso seria feito em SQL, use a função `show_query()`.
 
 ```{r}
-mtcars_on_db %>% 
-  group_by(carb) %>% 
-  summarise(mean(mpg)) %>% 
+mtcars_on_db %>%
+  group_by(carb) %>%
+  summarise(mean(mpg)) %>%
   show_query()
 ```
 
 Isso funciona para qualquer tipo de consulta.
 
 ```{r}
-consulta <- 
+consulta <-
   mtcars_on_db %>%
-  select(cars, drat, carb, mpg) %>% 
-  filter(drat < 3.15) %>% 
+  select(cars, drat, carb, mpg) %>%
+  filter(drat < 3.15) %>%
   mutate(
     drat_percent = drat / sum(drat, na.rm = TRUE),
     carb = case_when(
@@ -137,15 +137,15 @@ consulta <-
       carb == 4 ~ "quatro carbs",
       carb == 8 ~ "oito carbs"
     )
-  ) %>% 
-  arrange(desc(mpg)) %>% 
-  select(cars, carb, mpg, drat_percent) 
+  ) %>%
+  arrange(desc(mpg)) %>%
+  select(cars, carb, mpg, drat_percent)
 
 # confira o resultado da consulta
 consulta
 
 # confira a query
-consulta %>% 
+consulta %>%
   show_query()
 ```
 

@@ -16,24 +16,28 @@ description: 'Como submeter uma solução em R e em python.'
 topics: []
 ---
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 <div id="TOC">
 <ul>
-<li><a href="#definicao-do-desafio-utopian-tree">Definição do desafio “Utopian Tree”</a><ul>
-<li><a href="#descricao-da-funcao">Descrição da função</a></li>
-<li><a href="#dados-de-entrada-e-de-saida">Dados de entrada e de saída</a></li>
+<li><a href="#definição-do-desafio-utopian-tree">Definição do desafio “Utopian Tree”</a>
+<ul>
+<li><a href="#descrição-da-função">Descrição da função</a></li>
+<li><a href="#dados-de-entrada-e-de-saída">Dados de entrada e de saída</a></li>
 </ul></li>
-<li><a href="#construindo-a-funcao-em-python">Construindo a função em python</a><ul>
-<li><a href="#submissao">Submissão</a></li>
+<li><a href="#construindo-a-função-em-python">Construindo a função em python</a>
+<ul>
+<li><a href="#submissão">Submissão</a></li>
 </ul></li>
-<li><a href="#construindo-a-funcao-em-r">Construindo a função em R</a><ul>
-<li><a href="#submissao-1">Submissão</a></li>
+<li><a href="#construindo-a-função-em-r">Construindo a função em R</a>
+<ul>
+<li><a href="#submissão-1">Submissão</a></li>
 </ul></li>
 </ul>
 </div>
 
 <p>Dias atrás recebi um <a href="https://www.hackerrank.com/challenges/utopian-tree/problem?">link</a> para um desafio do site <a href="https://www.hackerrank.com">HackerRank</a>. O desafio fazia parte de uma das etapas do processo seletivo para a vaga de analista de dados de uma empresa que oferece serviços de transporte privado contratados por aplicativo de celular. Eu resolvi esse desafio usando as linguagens R e python. Eu resolvi escrever um post sobre isso pois a submissão do teste em R é diferente da submissão em python.</p>
-<div id="definicao-do-desafio-utopian-tree" class="section level2">
+<div id="definição-do-desafio-utopian-tree" class="section level2">
 <h2>Definição do desafio “Utopian Tree”</h2>
 <p>A árvore utópica do desafio tem dois ciclos de crescimento a cada ano.</p>
 <ul>
@@ -103,11 +107,11 @@ Altura
 </tr>
 </tbody>
 </table>
-<div id="descricao-da-funcao" class="section level3">
+<div id="descrição-da-função" class="section level3">
 <h3>Descrição da função</h3>
 <p>O desafio pede para que seja criada a função <code>utopianTree</code>. Esta função deve conter apenas o argumento/parâmetro <code>n</code>, que é um número inteiro que informa por quantos ciclos de crescimento a árvore utópica passará. A função deve retornar um número inteiro com o tamanho final da árvore.</p>
 </div>
-<div id="dados-de-entrada-e-de-saida" class="section level3">
+<div id="dados-de-entrada-e-de-saída" class="section level3">
 <h3>Dados de entrada e de saída</h3>
 <p>Os dados de entrada são fornecidos pelo próprio site do desafio e devem ser lidos pelo “stdin”. Um exemplo dos dados de entrada:</p>
 <pre><code>3
@@ -120,7 +124,7 @@ Altura
 7</code></pre>
 </div>
 </div>
-<div id="construindo-a-funcao-em-python" class="section level2">
+<div id="construindo-a-função-em-python" class="section level2">
 <h2>Construindo a função em python</h2>
 <p>Vou começar pela função em python que deu menos dor de cabeça na hora da submissão.</p>
 <pre class="python"><code>def utopianTree(n):
@@ -146,7 +150,7 @@ Altura
 <p>Mas se a árvore passar por 4 ciclos, o resultado deve ser igual a 7.</p>
 <pre class="python"><code>utopianTree(4)</code></pre>
 <pre><code>## 7</code></pre>
-<div id="submissao" class="section level3">
+<div id="submissão" class="section level3">
 <h3>Submissão</h3>
 <p>A parte de submissão da solução em python é facilitada pelo site. Ao selecionar a linguagem python para a solução do desafio será exibido o código abaixo:</p>
 <pre class="python"><code>#!/bin/python3
@@ -176,7 +180,7 @@ if __name__ == &#39;__main__&#39;:
 
     fptr.close()</code></pre>
 <p>A única coisa que precisa ser feita é completar a função e submeter o código. O código para a leitura dos dados de entrada e o consumo dos dados de saída já estão prontos. Isso é feito pelo trecho de código que começa com <code>if __name__ == '__main__':</code>.</p>
-<div id="solucao-completa-em-python" class="section level4">
+<div id="solução-completa-em-python" class="section level4">
 <h4>Solução completa em python</h4>
 <p>A solução completa em python ficaria assim:</p>
 <pre class="python"><code>#!/bin/python3
@@ -223,7 +227,7 @@ if __name__ == &#39;__main__&#39;:
 </div>
 </div>
 </div>
-<div id="construindo-a-funcao-em-r" class="section level2">
+<div id="construindo-a-função-em-r" class="section level2">
 <h2>Construindo a função em R</h2>
 <p>A função em R é relativamente parecida com a função em python. Mas existem duas diferenças importantes: a primeira é como a função deve retornar os dados de saída e a segunda é como o código deve ser submetido.</p>
 <pre class="r"><code>utopian_tree &lt;- function(n) {
@@ -253,7 +257,7 @@ if __name__ == &#39;__main__&#39;:
 <p>Mas se a árvore passar por 4 ciclos, o resultado deve ser igual a 7.</p>
 <pre class="r"><code>utopian_tree(4)</code></pre>
 <pre><code>## 7</code></pre>
-<div id="submissao-1" class="section level3">
+<div id="submissão-1" class="section level3">
 <h3>Submissão</h3>
 <p>Quando selecionamos a linguagem R para resolver o desafio, a única mensagem que vemos no editor é:</p>
 <pre class="r"><code># Enter your code here. Read input from STDIN. Print output to STDOUT</code></pre>
@@ -272,7 +276,7 @@ n_cycles &lt;- as.numeric(sample_input[-1])</code></pre>
 for (test in 1:n_test_cases){
   utopian_tree(n_cycles[test])
 }</code></pre>
-<div id="solucao-completa-em-r" class="section level4">
+<div id="solução-completa-em-r" class="section level4">
 <h4>Solução completa em R</h4>
 <p>A solução completa em R fica assim:</p>
 <pre class="r"><code># lendo os dados de entrada. 
