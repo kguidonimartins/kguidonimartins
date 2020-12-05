@@ -1,0 +1,14 @@
+<!-- A Hugo Shortcode that can embed html page -->
+{{ with .Get 0 }}
+    <iframe
+        src="{{ . }}"
+        height="600"
+        width="500"
+        frameborder="0"
+        marginwidth="0"
+        marginheight="0"
+        scrolling="yes"
+        style="width: 110%; position: relative; "
+        allowfullscreen="true">
+    </iframe>
+{{ end }}

@@ -1,0 +1,19 @@
+<h2 id="current-work">Current work</h2>
+
+{{ range .Site.Data.bio.work }}
+  {{ if (not (isset . "end")) }}
+<ul>
+  <li>{{ .description | markdownify  }} (since {{ .start }}). </li>
+</ul>
+  {{ end }}
+{{ end }}
+
+<h2 id="current-service">I'm also...</h2>
+
+{{ range .Site.Data.bio.service }}
+  {{ if (not (isset . "end")) }}
+<ul>
+  <li>{{ .description | markdownify  }}.</li>
+</ul>
+  {{ end }}
+{{ end }}
