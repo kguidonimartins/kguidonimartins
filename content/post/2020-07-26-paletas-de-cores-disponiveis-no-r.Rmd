@@ -71,7 +71,7 @@ for (i in seq_along(available_palettes)) {
       ) +
     labs(
       title = glue("hcl.pals('{names(available_palettes[i])}')"),
-      subtitle = glue("use: hcl.colors(n = 20, palette = '{available_palettes[i]}')"),
+      subtitle = glue("use: grDevices::hcl.colors(n = 20, palette = '{available_palettes[i]}')"),
       color = "vp_flow"
     )
   print(plot_pals)
