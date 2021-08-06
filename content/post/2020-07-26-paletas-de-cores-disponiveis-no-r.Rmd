@@ -17,6 +17,7 @@ Pacotes necessários:
 
 ```{r, message=FALSE}
 if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("grDevices")) install.packages("grDevices")
 if (!require("dplyr")) install.packages("dplyr")
 if (!require("scales")) install.packages("scales")
 if (!require("glue")) install.packages("glue")
@@ -220,7 +221,7 @@ ggplot() +
 Posso também extrair os códigos hexadecimais das cores da paleta e usar em outro programa:
 
 ```{r}
-hcl.colors(n = 20, "Viridis")
+grDevices::hcl.colors(n = 20, "Viridis")
 ```
 
 

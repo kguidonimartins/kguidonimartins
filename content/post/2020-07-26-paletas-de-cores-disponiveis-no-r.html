@@ -17,6 +17,7 @@ description: 'Um cardápio das paletas de cores disponíveis no R'
 <p>O daltonismo, pelo menos pra mim, torna a busca por paletas de cores uma tarefa interessante. Esse post é apenas um lembrete de acesso rápido sobre as paletas disponíveis no R por padrão. Eu mostro como utilizar em gráficos (por exemplo, no <code>{ggplot2}</code>) e como extrair os códigos hexadecimais das cores das paletas. Vale a pena dar uma olhada <a href="https://www.color-hex.com/">aqui</a> também.</p>
 <p>Pacotes necessários:</p>
 <pre class="r"><code>if (!require(&quot;ggplot2&quot;)) install.packages(&quot;ggplot2&quot;)
+if (!require(&quot;grDevices&quot;)) install.packages(&quot;grDevices&quot;)
 if (!require(&quot;dplyr&quot;)) install.packages(&quot;dplyr&quot;)
 if (!require(&quot;scales&quot;)) install.packages(&quot;scales&quot;)
 if (!require(&quot;glue&quot;)) install.packages(&quot;glue&quot;)
@@ -38,7 +39,7 @@ for (i in seq_along(pals)) {
   names(pals_vec) &lt;- pals_names
   available_palettes &lt;- c(available_palettes, pals_vec)
 }</code></pre>
-<p>Um total de 110 paletas disponíveis!</p>
+<p>Um total de 115 paletas disponíveis!</p>
 <pre class="r"><code>available_palettes</code></pre>
 <pre><code>##      divergingx      divergingx      divergingx      divergingx      divergingx 
 ##      &quot;ArmyRose&quot;         &quot;Earth&quot;          &quot;Fall&quot;        &quot;Geyser&quot;      &quot;TealRose&quot; 
@@ -46,44 +47,46 @@ for (i in seq_along(pals)) {
 ##         &quot;Temps&quot;          &quot;PuOr&quot;          &quot;RdBu&quot;          &quot;RdGy&quot;          &quot;PiYG&quot; 
 ##      divergingx      divergingx      divergingx      divergingx      divergingx 
 ##          &quot;PRGn&quot;          &quot;BrBG&quot;        &quot;RdYlBu&quot;        &quot;RdYlGn&quot;      &quot;Spectral&quot; 
-##      divergingx      divergingx     qualitative     qualitative     qualitative 
-##      &quot;Zissou 1&quot;       &quot;Cividis&quot;      &quot;Pastel 1&quot;        &quot;Dark 2&quot;        &quot;Dark 3&quot; 
+##      divergingx      divergingx      divergingx     qualitative     qualitative 
+##      &quot;Zissou 1&quot;       &quot;Cividis&quot;          &quot;Roma&quot;      &quot;Pastel 1&quot;        &quot;Dark 2&quot; 
 ##     qualitative     qualitative     qualitative     qualitative     qualitative 
-##         &quot;Set 2&quot;         &quot;Set 3&quot;          &quot;Warm&quot;          &quot;Cold&quot;      &quot;Harmonic&quot; 
-##     qualitative       diverging       diverging       diverging       diverging 
-##       &quot;Dynamic&quot;      &quot;Blue-Red&quot;    &quot;Blue-Red 2&quot;    &quot;Blue-Red 3&quot;     &quot;Red-Green&quot; 
+##        &quot;Dark 3&quot;         &quot;Set 2&quot;         &quot;Set 3&quot;          &quot;Warm&quot;          &quot;Cold&quot; 
+##     qualitative     qualitative       diverging       diverging       diverging 
+##      &quot;Harmonic&quot;       &quot;Dynamic&quot;      &quot;Blue-Red&quot;    &quot;Blue-Red 2&quot;    &quot;Blue-Red 3&quot; 
 ##       diverging       diverging       diverging       diverging       diverging 
-##  &quot;Purple-Green&quot;  &quot;Purple-Brown&quot;   &quot;Green-Brown&quot; &quot;Blue-Yellow 2&quot; &quot;Blue-Yellow 3&quot; 
+##     &quot;Red-Green&quot;  &quot;Purple-Green&quot;  &quot;Purple-Brown&quot;   &quot;Green-Brown&quot; &quot;Blue-Yellow 2&quot; 
 ##       diverging       diverging       diverging       diverging       diverging 
-##  &quot;Green-Orange&quot;  &quot;Cyan-Magenta&quot;        &quot;Tropic&quot;          &quot;Broc&quot;          &quot;Cork&quot; 
-##       diverging       diverging       diverging       diverging      sequential 
-##           &quot;Vik&quot;        &quot;Berlin&quot;        &quot;Lisbon&quot;        &quot;Tofino&quot;         &quot;Grays&quot; 
+## &quot;Blue-Yellow 3&quot;  &quot;Green-Orange&quot;  &quot;Cyan-Magenta&quot;        &quot;Tropic&quot;          &quot;Broc&quot; 
+##       diverging       diverging       diverging       diverging       diverging 
+##          &quot;Cork&quot;           &quot;Vik&quot;        &quot;Berlin&quot;        &quot;Lisbon&quot;        &quot;Tofino&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##   &quot;Light Grays&quot;       &quot;Blues 2&quot;       &quot;Blues 3&quot;     &quot;Purples 2&quot;     &quot;Purples 3&quot; 
+##         &quot;Grays&quot;   &quot;Light Grays&quot;       &quot;Blues 2&quot;       &quot;Blues 3&quot;     &quot;Purples 2&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##        &quot;Reds 2&quot;        &quot;Reds 3&quot;      &quot;Greens 2&quot;      &quot;Greens 3&quot;          &quot;Oslo&quot; 
+##     &quot;Purples 3&quot;        &quot;Reds 2&quot;        &quot;Reds 3&quot;      &quot;Greens 2&quot;      &quot;Greens 3&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##   &quot;Purple-Blue&quot;    &quot;Red-Purple&quot;      &quot;Red-Blue&quot; &quot;Purple-Orange&quot; &quot;Purple-Yellow&quot; 
+##          &quot;Oslo&quot;   &quot;Purple-Blue&quot;    &quot;Red-Purple&quot;      &quot;Red-Blue&quot; &quot;Purple-Orange&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##   &quot;Blue-Yellow&quot;  &quot;Green-Yellow&quot;    &quot;Red-Yellow&quot;          &quot;Heat&quot;        &quot;Heat 2&quot; 
+## &quot;Purple-Yellow&quot;   &quot;Blue-Yellow&quot;  &quot;Green-Yellow&quot;    &quot;Red-Yellow&quot;          &quot;Heat&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##       &quot;Terrain&quot;     &quot;Terrain 2&quot;       &quot;Viridis&quot;        &quot;Plasma&quot;       &quot;Inferno&quot; 
+##        &quot;Heat 2&quot;       &quot;Terrain&quot;     &quot;Terrain 2&quot;       &quot;Viridis&quot;        &quot;Plasma&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##     &quot;Dark Mint&quot;          &quot;Mint&quot;        &quot;BluGrn&quot;          &quot;Teal&quot;       &quot;TealGrn&quot; 
+##       &quot;Inferno&quot;        &quot;Rocket&quot;          &quot;Mako&quot;     &quot;Dark Mint&quot;          &quot;Mint&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##         &quot;Emrld&quot;         &quot;BluYl&quot;      &quot;ag_GrnYl&quot;         &quot;Peach&quot;        &quot;PinkYl&quot; 
+##        &quot;BluGrn&quot;          &quot;Teal&quot;       &quot;TealGrn&quot;         &quot;Emrld&quot;         &quot;BluYl&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##          &quot;Burg&quot;        &quot;BurgYl&quot;         &quot;RedOr&quot;         &quot;OrYel&quot;          &quot;Purp&quot; 
+##      &quot;ag_GrnYl&quot;         &quot;Peach&quot;        &quot;PinkYl&quot;          &quot;Burg&quot;        &quot;BurgYl&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##        &quot;PurpOr&quot;        &quot;Sunset&quot;       &quot;Magenta&quot;    &quot;SunsetDark&quot;     &quot;ag_Sunset&quot; 
+##         &quot;RedOr&quot;         &quot;OrYel&quot;          &quot;Purp&quot;        &quot;PurpOr&quot;        &quot;Sunset&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##        &quot;BrwnYl&quot;        &quot;YlOrRd&quot;        &quot;YlOrBr&quot;          &quot;OrRd&quot;       &quot;Oranges&quot; 
+##       &quot;Magenta&quot;    &quot;SunsetDark&quot;     &quot;ag_Sunset&quot;        &quot;BrwnYl&quot;        &quot;YlOrRd&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##          &quot;YlGn&quot;        &quot;YlGnBu&quot;          &quot;Reds&quot;          &quot;RdPu&quot;          &quot;PuRd&quot; 
+##        &quot;YlOrBr&quot;          &quot;OrRd&quot;       &quot;Oranges&quot;          &quot;YlGn&quot;        &quot;YlGnBu&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##       &quot;Purples&quot;        &quot;PuBuGn&quot;          &quot;PuBu&quot;        &quot;Greens&quot;          &quot;BuGn&quot; 
+##          &quot;Reds&quot;          &quot;RdPu&quot;          &quot;PuRd&quot;       &quot;Purples&quot;        &quot;PuBuGn&quot; 
 ##      sequential      sequential      sequential      sequential      sequential 
-##          &quot;GnBu&quot;          &quot;BuPu&quot;         &quot;Blues&quot;       &quot;Lajolla&quot;         &quot;Turku&quot;</code></pre>
+##          &quot;PuBu&quot;        &quot;Greens&quot;          &quot;BuGn&quot;          &quot;GnBu&quot;          &quot;BuPu&quot; 
+##      sequential      sequential      sequential      sequential      sequential 
+##         &quot;Blues&quot;       &quot;Lajolla&quot;         &quot;Turku&quot;        &quot;Hawaii&quot;        &quot;Batlow&quot;</code></pre>
 <p>Vou utilizar as estimativas de tamanho populacional por países para exibir as paletas:</p>
 <pre class="r"><code>for (i in seq_along(available_palettes)) {
   plot_pals &lt;- ggplot() +
@@ -99,7 +102,7 @@ for (i in seq_along(pals)) {
       ) +
     labs(
       title = glue(&quot;hcl.pals(&#39;{names(available_palettes[i])}&#39;)&quot;),
-      subtitle = glue(&quot;use: hcl.colors(n = 20, palette = &#39;{available_palettes[i]}&#39;)&quot;),
+      subtitle = glue(&quot;use: grDevices::hcl.colors(n = 20, palette = &#39;{available_palettes[i]}&#39;)&quot;),
       color = &quot;vp_flow&quot;
     )
   print(plot_pals)
@@ -228,7 +231,7 @@ for (i in seq_along(pals)) {
       )</code></pre>
 <p><img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-6-1.png" alt="" width="800" /></p>
 <p>Posso também extrair os códigos hexadecimais das cores da paleta e usar em outro programa:</p>
-<pre class="r"><code>hcl.colors(n = 20, &quot;Viridis&quot;)</code></pre>
+<pre class="r"><code>grDevices::hcl.colors(n = 20, &quot;Viridis&quot;)</code></pre>
 <pre><code>##  [1] &quot;#4B0055&quot; &quot;#491562&quot; &quot;#432A6F&quot; &quot;#383B7A&quot; &quot;#214C85&quot; &quot;#005C8D&quot; &quot;#006B93&quot;
 ##  [8] &quot;#007A96&quot; &quot;#008898&quot; &quot;#009597&quot; &quot;#00A193&quot; &quot;#00AD8D&quot; &quot;#00B884&quot; &quot;#00C279&quot;
 ## [15] &quot;#46CA6B&quot; &quot;#76D25A&quot; &quot;#9CD948&quot; &quot;#BFDE36&quot; &quot;#DFE22B&quot; &quot;#FDE333&quot;</code></pre>
