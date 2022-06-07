@@ -42,7 +42,7 @@ Vetor identificado com os nomes das paletas:
 available_palettes <- c()
 
 for (i in seq_along(pals)) {
-  pals_vec <- hcl.pals(pals[i])
+  pals_vec <- hcl.pals(type = pals[i])
   pals_names <- rep(pals[i], length(pals_vec))
   names(pals_vec) <- pals_names
   available_palettes <- c(available_palettes, pals_vec)
@@ -59,8 +59,9 @@ Vou utilizar as estimativas de tamanho populacional por países para exibir as p
 
 ```{r, eval = FALSE}
 for (i in seq_along(available_palettes)) {
-  plot_pals <- ggplot() +
-    geom_sf(data = world, aes(fill = pop_est)) +
+  plot_pals <-
+    ggplot() +
+    geom_sf(data = world, aes(fill = as.numeric(pop_est))) +
     scale_fill_gradientn(
         colours = hcl.colors(
           n = 20,
@@ -71,9 +72,9 @@ for (i in seq_along(available_palettes)) {
         breaks = breaks_extended(n = 10)
       ) +
     labs(
-      title = glue("hcl.pals('{names(available_palettes[i])}')"),
-      subtitle = glue("use: grDevices::hcl.colors(n = 20, palette = '{available_palettes[i]}')"),
-      color = "vp_flow"
+      title = glue("hcl.pals(type = '{names(available_palettes[i])}')"),
+      subtitle = glue("código para usar essa paleta: `grDevices::hcl.colors(n = 20, palette = '{available_palettes[i]}')`"),
+      fill = "Tamanho populacional"
     )
   print(plot_pals)
 }
@@ -223,5 +224,3 @@ Posso também extrair os códigos hexadecimais das cores da paleta e usar em out
 ```{r}
 grDevices::hcl.colors(n = 20, "Viridis")
 ```
-
-
