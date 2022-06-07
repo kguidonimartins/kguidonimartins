@@ -57,6 +57,8 @@ available_palettes
 
 Vou utilizar as estimativas de tamanho populacional por países para exibir as paletas:
 
+<!-- NOTE 2022-06-07: Para atualizar as figuras é necessário mudar os chunks das figuras para `eval=TRUE` e rodar `rmarkdown::render()`. -->
+
 ```{r, eval = FALSE}
 for (i in seq_along(available_palettes)) {
   plot_pals <-
@@ -201,20 +203,23 @@ for (i in seq_along(figuras)) {
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-109.png" alt="" width="800" />
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-5-110.png" alt="" width="800" />
 
+
 Escolho a paleta e utilizo no plot, por exemplo:
 
 ```{r, eval = FALSE}
-ggplot() +
-    geom_sf(data = world, aes(fill = pop_est)) +
-    scale_fill_gradientn(
-        colours = hcl.colors(
-          n = 20,
-          palette = "Viridis" # paleta escolhida
-        ),
-        labels = comma_format(),
-        n.breaks = 10,
-        breaks = breaks_extended(n = 10)
-      )
+pop_map <-
+  ggplot() +
+  geom_sf(data = world, aes(fill = as.numeric(pop_est))) +
+  scale_fill_gradientn(
+    colours = hcl.colors(
+      n = 20,
+      palette = "Viridis" # paleta escolhida
+      ),
+    labels = comma_format(),
+    n.breaks = 10,
+    breaks = breaks_extended(n = 10)
+  )
+print(pop_map)
 ```
 
 <img src="../../post/2020-07-26-paletas-de-cores-disponiveis-no-r_files/figure-html/unnamed-chunk-6-1.png" alt="" width="800" />
