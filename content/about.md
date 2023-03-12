@@ -5,7 +5,7 @@ sidemenu: "true"
 title: About
 ---
 
-Meu nome é Karlo Guidoni Martins. Atualmente, sou estudante de doutorado em Ecologia e Evolução na Universidade Federal de Goiás. Esta página funciona como um caderno de anotações para mim. As postagens variam entre programação, fluxo de trabalho diário e coisas que tenho aprendido.
+Meu nome é Karlo Guidoni Martins. Atualmente, atuo como consultor em administração e análise de dados em parceria com a Fundação Brasileira para o Desenvolvimento Sustentável. Tenho experiência em análises estatísticas univariadas e multivariadas e em análises espaciais. Tenho interesse e experiência em programação em linguagens como R, python e shell script. Rotineiramente, administro, transformo e manipulo dados estruturados usando linguagens de programação. Meu fluxo de trabalho diário usa ferramentas como Git para controle de versão de arquivos, e Makefile e Docker para garantir a reprodutibilidade de rotinas analíticas.
 
 Os links para meus perfis em algumas redes sociais e o meu endereço de e-mail estão no painel à esquerda.
 
